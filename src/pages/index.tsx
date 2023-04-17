@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <div>
       <h1>
-        Front-end
+        Index
       </h1>
     </div>
   )
