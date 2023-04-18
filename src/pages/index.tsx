@@ -5,7 +5,8 @@ import styles from '../../styles/home.module.scss';
 
 import logoImg from '../../public/Icon-Dice-Roll.svg';
 
-import { Input } from "../components/ui/input";
+import { Input } from "../components/ui/Input";
+import { Button } from "../components/ui/Button";
 
 export default function Home() {
   return (
@@ -19,14 +20,22 @@ export default function Home() {
         <div className={styles.login}>
           <form>
             <Input
-            placeholder="Digite seu email"
-            type="text"
+              placeholder="Digite seu email"
+              type="text"
             />
-          
+
             <Input
-            placeholder="Digite sua senha"
-            type="password"
+              placeholder="Digite sua senha"
+              type="password"
             />
+
+            <Button
+              type="submit"
+              loading={false}
+            >
+              Entrar
+            </Button>
+
           </form>
         </div>
       </div>

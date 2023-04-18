@@ -3,13 +3,14 @@
     width: 587px;
     height: 3.75rem;
     border: 0;
-    border-radius: 0.5rem;
+    border-radius: 0.625rem;
     background-color: var(--Light-1);
     color: var(--dark-1);
     padding: 1rem;
-    border: 1px solid var(--dark-1);
+    border: 1px solid var(--Dark-1);
 }
 
 .input::placeholder {
     color: rgba (255, 255, 255, 0.8);
 }
+
