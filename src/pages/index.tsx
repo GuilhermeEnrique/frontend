@@ -15,9 +15,13 @@ export default function Home() {
         <title>Dice-Roll - Faça seu login</title>
       </Head>
       <div className={styles.containerCenter}>
-        <Image className="img" src={logoImg} alt="Logo Dice Roll" />
-
+        <div className={styles.logo}>
+          <Image className="img" src={logoImg} alt="Logo Dice Roll" />
+          <p className={styles.title}>Crie personagens facilmente, organize suas campanhas, seu inventários e atributos e tenha seus dados na sua tela.</p>
+        </div>
         <div className={styles.login}>
+          <h1 className={styles.titleLogin}>Login</h1>
+          <p className={styles.subtitleLogin}>Digite seu endereço de e-mail e senha para acessar sua conta</p>
           <form>
             <Input
               placeholder="Digite seu email"
@@ -28,14 +32,14 @@ export default function Home() {
               placeholder="Digite sua senha"
               type="password"
             />
-
+            <a className={styles.text}> Esqueceu sua senha?</a>
             <Button
               type="submit"
               loading={false}
             >
               Entrar
             </Button>
-
+            <a className={styles.text}> Não tem uma conta? Cadastre-se</a>
           </form>
         </div>
       </div>
