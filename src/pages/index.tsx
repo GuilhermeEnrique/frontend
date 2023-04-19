@@ -8,6 +8,8 @@ import logoImg from '../../public/Icon-Dice-Roll.svg';
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 
+import Link from 'next/link';
+
 export default function Home() {
   return (
     <>
@@ -32,14 +34,18 @@ export default function Home() {
               placeholder="Digite sua senha"
               type="password"
             />
-            <a className={styles.text}> Esqueceu sua senha?</a>
+            <Link href="/reset-password" className={styles.text}>
+              Esqueceu sua senha?
+            </Link>
             <Button
               type="submit"
               loading={false}
             >
               Entrar
             </Button>
-            <a className={styles.text}> Não tem uma conta? Cadastre-se</a>
+            <Link href="/cadastrar" className={styles.text}>
+              Não tem uma conta? Cadastre-se
+            </Link>
           </form>
         </div>
       </div>
