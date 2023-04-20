@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { useContext, FormEvent } from "react";
 import Image from "next/image";
 import styles from '../../styles/home.module.scss';
 
@@ -8,9 +8,24 @@ import logoImg from '../../public/Icon-Dice-Roll.svg';
 import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 
+import { AuthContext } from "../contexts/AuthContext";
+
 import Link from 'next/link';
 
 export default function Home() {
+  const { signIn } = useContext(AuthContext);
+
+  async function handleLogin(event: FormEvent ){
+    event.preventDefault();
+
+    let data = {
+      email: "algum@teste.com",
+      password: "123123"
+    }
+
+    await signIn(data)
+  }
+
   return (
     <>
       <Head>
@@ -24,7 +39,7 @@ export default function Home() {
         <div className={styles.login}>
           <h1 className={styles.titleLogin}>Login</h1>
           <p className={styles.subtitleLogin}>Digite seu endereço de e-mail e senha para acessar sua conta</p>
-          <form>
+          <form onSubmit={handleLogin}>
             <Input
               placeholder="Digite seu email"
               type="text"
