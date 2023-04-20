@@ -1,14 +1,4 @@
 /*Tela de Cadastro*/
-.containerCadastro {
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-image: url('../public/BGLogin.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-}
 
 .cadastro {
     width: 470px;
@@ -97,10 +87,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
     background-image: url('../public/BGLogin.png');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
 }
 
 .logo {

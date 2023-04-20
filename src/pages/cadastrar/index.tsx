@@ -16,7 +16,7 @@ export default function Cadastrar() {
             <Head>
                 <title>Dice-Roll - Faça seu cadastro agora!</title>
             </Head>
-            <div className={styles.containerCadastro}>
+            <div className={styles.containerCenter}>
                 <div className={styles.cadastro}>
                     <Image className="img" src={logoImg} alt="Logo Dice Roll" />
                     <h1 className={styles.titleCadastro}>Cadastra-se</h1>
