@@ -14,7 +14,7 @@ export default function Cadastrar() {
     return (
         <>
             <Head>
-                <title>Dice-Roll - Faça seu login</title>
+                <title>Dice-Roll - Faça seu cadastro agora!</title>
             </Head>
             <div className={styles.containerCadastro}>
                 <div className={styles.cadastro}>
@@ -23,28 +23,32 @@ export default function Cadastrar() {
                     <p className={styles.subtitleCadastro}>Preencha as informações para criar uma conta e inscreva-se para continuar</p>
                     <form>
                         <Input
+                            className={styles.inputCadastro}
                             placeholder="Usuário"
                             type="text"
                         />
 
                         <Input
+                            className={styles.inputCadastro}
                             placeholder="Digite seu email"
                             type="text"
                         />
 
                         <Input
+                            className={styles.inputCadastro}
                             placeholder="Digite sua senha"
                             type="password"
                         />
 
                         <Button
+                            className={styles.buttonCadastro}
                             type="submit"
                             loading={false}
                         >
                             Cadastrar
                         </Button>
 
-                        <Link href="/cadastrar" className={styles.textCadastro}>
+                        <Link href="/" className={styles.textCadastro}>
                             Já tem uma conta? Entrar
                         </Link>
                     </form>
