@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React from "react";
+import React, { FormEvent, useState, useContext } from "react";
 import Image from "next/image";
 import styles from '../../../styles/home.module.scss';
 
@@ -8,9 +8,39 @@ import logoImg from '../../../public/Icon-Dice-Roll.svg';
 import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 
+import { AuthContext } from "../../contexts/AuthContext";
+
 import Link from 'next/link';
 
 export default function Cadastrar() {
+    const { signUp } = useContext(AuthContext);
+
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+    const [loading, setLoading] = useState(false);
+
+    async function handleSignUp(event: FormEvent) {
+        event.preventDefault();
+
+        if (name === '' || email === '' || password === '') {
+            alert("PRENCHA TODOS OS CAMPOS")
+            return;
+        }
+        setLoading(true);
+
+        let data = {
+            name,
+            email,
+            password
+        }
+
+        await signUp(data)
+
+        setLoading(false)
+    }
+
     return (
         <>
             <Head>
@@ -21,29 +51,34 @@ export default function Cadastrar() {
                     <Image className="img" src={logoImg} alt="Logo Dice Roll" />
                     <h1 className={styles.titleCadastro}>Cadastra-se</h1>
                     <p className={styles.subtitleCadastro}>Preencha as informações para criar uma conta e inscreva-se para continuar</p>
-                    <form>
+                    <form onSubmit={handleSignUp}>
                         <Input
                             className={styles.inputCadastro}
-                            placeholder="Usuário"
+                            placeholder="Digite seu nome de usuário"
                             type="text"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
 
                         <Input
                             className={styles.inputCadastro}
                             placeholder="Digite seu email"
                             type="text"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
 
                         <Input
                             className={styles.inputCadastro}
                             placeholder="Digite sua senha"
                             type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
 
                         <Button
-                            className={styles.buttonCadastro}
                             type="submit"
-                            loading={false}
+                            loading={loading}
                         >
                             Cadastrar
                         </Button>

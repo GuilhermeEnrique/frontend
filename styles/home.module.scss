@@ -15,8 +15,8 @@
 
     img {
         display: flex;
-        width: 160px;
-        height: 160px;
+        width: 150px;
+        height: 150px;
         object-fit: cover;
     }
 
@@ -32,12 +32,20 @@
         text-align: center;
         margin-bottom: 30px;
     }
+
+    form button {
+        width: 370px;
+        height: 50px;
+        font-size: 1rem;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
 }
 
 .inputCadastro {
     margin-bottom: 1rem;
     width: 370px;
-    height: 40px;
+    height: 50px;
     border: 0;
     border-radius: 0.625rem;
     background-color: var(--Light-1);
@@ -49,10 +57,10 @@
 .buttonCadastro {
     box-shadow: (0px 4px 4px rgba(0, 0, 0, 0.25));
     background-color: var(--Dark);
-    height: 40px;
+    height: 50px;
     font-size: 1rem;
-    margin-top: 30px;
-    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     width: 370px;
     border-radius: 10px;
 }
@@ -87,10 +95,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('../public/BGLogin.png');
-    background-repeat: no-repeat;
+    background: var(--Light) url('../public/BGLogin.png') no-repeat center center fixed;
     background-size: cover;
-    background-position: center;
 }
 
 .logo {
