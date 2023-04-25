@@ -1,10 +1,11 @@
-import { createContext, ReactNode, useState } from 'react';
+import { createContext, ReactNode, useState, useEffect } from 'react';
 
 import { api } from '../services/apiClient';
 
 import { destroyCookie, setCookie, parseCookies } from 'nookies'
 import Router from 'next/router';
 
+import { toast } from 'react-toastify';
 
 type AuthContextData = {
     user: UserProps;
@@ -51,6 +52,26 @@ export function AuthProvider({ children }: AuthProviderProps) {
     const [user, setUser] = useState<UserProps>()
     const isAuthenticated = !!user;
 
+    useEffect(() => {
+        const { '@nextauth.token': token } = parseCookies();
+
+        if (token) {
+            api.get('/about').then(response => {
+                const { id, name, email } = response.data;
+
+                setUser({
+                    id,
+                    name,
+                    email
+                })
+            })
+                .catch(() => {
+                    //Se deu erro, deslogamos o usuário.
+                    signOut();
+                })
+        }
+    }, [])
+
     async function signIn({ email, password }: SignInProps) {
         try {
             const response = await api.post('/session', {
@@ -75,11 +96,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
             //Passar para proximas requisiçoes o nosso token
             api.defaults.headers['Authorization'] = `Bearer ${token}`
 
+            toast.success('Logado com sucesso!', {
+                theme: "colored"
+            })
+
             //Redirecionar o user para /dashboard
             Router.push('/dashboard')
 
 
         } catch (err) {
+            toast.error("Erro ao acessar!", {
+                theme: "colored"
+            })
             console.log("ERRO AO ACESSAR ", err)
         }
     }
@@ -91,10 +119,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
                 password
             })
 
-            console.log("CADASTRADO COM SUCESSO!");
+            toast.success("Cadastrado com sucesso!", {
+                theme: "colored"
+            })
 
             Router.push('/')
         } catch (err) {
+            toast.error("Erro ao cadastrar!", {
+                theme: "colored"
+            })
             console.log("erro ao tentar cadastrar", err)
         }
     }

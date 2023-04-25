@@ -9,6 +9,7 @@ import { Input } from "../../components/ui/Input";
 import { Button } from "../../components/ui/Button";
 
 import { AuthContext } from "../../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 import Link from 'next/link';
 
@@ -25,7 +26,9 @@ export default function Cadastrar() {
         event.preventDefault();
 
         if (name === '' || email === '' || password === '') {
-            alert("PRENCHA TODOS OS CAMPOS")
+            toast.warn("Preencha os dados corretamente!", {
+                theme: "colored"
+            })
             return;
         }
         setLoading(true);

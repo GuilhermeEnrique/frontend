@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30rem;
+    padding: 20px;
+    background: url('../../../public/BGLogin.png') no-repeat;
+}
+
+.campanhas {
+    background: url('../../../public/Mapa.png') no-repeat fixed;
+    padding: 12rem 8rem;
+    border: solid 1px var(--Dark);
+    border-radius: 20px;
+    color: var(--Light);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 75px;
+    text-align: center;
+    box-shadow :(5px 5px 10px rgba(0, 0, 0, 0.253));
+}
+
+.personagem {
+    background: url('../../../public/Personagem.png') no-repeat center center fixed;
+    padding: 12rem 5rem;
+    border: solid 1px var(--Dark);
+    border-radius: 20px;
+    margin: 0px 40px 0px 40px;
+    color: var(--Light);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 75px;
+    text-align: center;
+    box-shadow :(5px 5px 10px rgba(0, 0, 0, 0.253));
+}
+
+.dados {
+    background: url('../../../public/Dados.png');
+    padding: 12rem 8rem;
+    color: var(--Light);
+    border: solid 1px var(--Dark);
+    border-radius: 20px;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 75px;
+    text-align: center;
+    box-shadow :(5px 5px 10px rgba(0, 0, 0, 0.253));
+}

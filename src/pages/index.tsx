@@ -9,8 +9,11 @@ import { Input } from "../components/ui/Input";
 import { Button } from "../components/ui/Button";
 
 import { AuthContext } from "../contexts/AuthContext";
+import { toast } from "react-toastify";
 
 import Link from 'next/link';
+
+import { canSSRGuest } from "../utils/canSSRGuest";
 
 export default function Home() {
   const { signIn } = useContext(AuthContext);
@@ -23,7 +26,9 @@ export default function Home() {
     event.preventDefault();
 
     if (email == '' || password == '') {
-      alert("PREENCHA OS DADOS")
+      toast.warn("Preencha os dados corretamente!", {
+        theme: "colored"
+      })
       return;
     }
 
@@ -84,3 +89,12 @@ export default function Home() {
     </>
   )
 }
+
+export const getServerSideProps = canSSRGuest(async (ctx) => {
+  return {
+    props: {
+
+    }
+  }
+
+})
