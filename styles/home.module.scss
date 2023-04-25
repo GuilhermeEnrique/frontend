@@ -189,6 +189,42 @@
 
     .login {
         width: 80%;
+
+        form button {
+            width: 200px;
+            height: 45px;
+            font-size: 1rem;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        form input {
+            width: 200px;
+        }
+    }
+
+    .titleLogin {
+        font-style: normal;
+        font-size: 35px;
+        display: flex;
+        align-items: flex-end;
+        margin-bottom: 1rem;
+    }
+
+    .subtitleLogin {
+        font-size: 18px;
+        line-height: 20px;
+        display: flex;
+    }
+
+    .text {
+        margin-top: 0.8rem;
+        color: blue;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+        text-align: center;
     }
 
     .logo {
