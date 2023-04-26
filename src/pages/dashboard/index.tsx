@@ -13,17 +13,21 @@ export default function Dashboard() {
             <div>
                 <Header />
                 <main className={styles.container}>
-                    <div>
-                        <Link className={styles.campanhas} href='/campanhas'>
-                            Campanhas
-                        </Link>
-                        <Link className={styles.personagem} href='/ficha-de-personagem'>
-                            Fichas de personagens
-                        </Link>
-                        <Link className={styles.dados} href='/dados'>
-                            Dados
-                        </Link>
-                    </div>
+                    
+                    <Link className={styles.personagem} href='/ficha-de-personagem'>
+                        Fichas<br /> de <br />personagens
+                    </Link>
+                    <Link className={styles.campanhas} href='/campanhas'>
+                        Campanhas
+                    </Link>
+                    <Link className={styles.dados} href='/dados'>
+                        Dados
+                    </Link>
+                    
+
+
+
+
                 </main>
             </div>
         </>

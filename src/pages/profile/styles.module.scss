@@ -1,0 +1,42 @@
+.container {
+    background-image: url('../../../public/Background.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 82vh;
+    // max-width: 720px;
+    margin: 4rem auto;
+    // padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.input {
+    margin-bottom: 1rem;
+    width: 400px;
+    height: 50px;
+    border: 0;
+    border-radius: 0.625rem;
+    background-color: var(--Light-1);
+    color: var(--dark-1);
+    padding: 1rem;
+    border: 1px solid var(--Dark-1);
+}
+
+.input::placeholder {
+    color: rgba (255, 255, 255, 0.8);
+}

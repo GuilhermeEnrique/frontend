@@ -94,6 +94,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url('../public/Background.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .logo {
@@ -180,10 +183,7 @@
 }
 
 @media (max-width: 1000px) {
-    .containerCenter {
-        width: 90%;
-    }
-
+    
     .login {
         width: 80%;
 
