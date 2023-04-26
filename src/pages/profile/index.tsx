@@ -4,8 +4,8 @@ import { Input } from "../../components/ui/Input"
 import { ButtonEdit } from "../../components/ui/ButtonEdit"
 import { ButtonSave } from "../../components/ui/ButtonSave"
 import { ButtonCancel } from "../../components/ui/ButtonCancel"
-import { FiEdit } from "react-icons/fi";
 import styles from './styles.module.scss'
+import Link from "next/link"
 
 export default function Profile() {
     return (
@@ -42,9 +42,11 @@ export default function Profile() {
                         <ButtonSave type="submit">
                             Salvar
                         </ButtonSave>
-                        <ButtonCancel>
-                            Cancelar
-                        </ButtonCancel>
+                        <Link href="/">
+                            <ButtonCancel>
+                                Cancelar
+                            </ButtonCancel>
+                        </Link>
                     </form>
                 </main>
             </div>

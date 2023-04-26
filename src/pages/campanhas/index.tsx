@@ -4,8 +4,12 @@ import { Header } from "../../components/Header"
 import { Input } from "../../components/ui/Input"
 import { ButtonSave } from "../../components/ui/ButtonSave"
 import { ButtonCancel } from "../../components/ui/ButtonCancel"
+import { setupAPIClient } from "../../services/api"
 import styles from './styles.module.scss'
 import Link from "next/link"
+import { toast } from "react-toastify"
+
+
 
 export default function Campanhas() {
     const [titulo, setTitulo] = useState('')
@@ -14,7 +18,18 @@ export default function Campanhas() {
     async function handleRegister(event: FormEvent) {
         event.preventDefault();
 
-        alert("Campanha: " + titulo);
+        if (titulo === ''){
+            return
+        }
+        const apiClient = setupAPIClient();
+        await apiClient.post('/campanha',{
+            titulo: titulo,
+            descricao: descricao
+        })
+
+        toast.success("Campanha criada com sucesso!")
+        setTitulo('');
+        setDescricao('');
     }
 
     const [selectedFile, setSelectedFile] = useState(null);
@@ -44,7 +59,7 @@ export default function Campanhas() {
                         <h2>Criar campanha</h2>
                     </div>
 
-                    <form className={styles.form} onSubmit={handleRegister} encType="multipart/form-data">
+                    <form className={styles.form} onSubmit={handleRegister}>
                         <div>
                             <input type="file" onChange={handleFileInputChange} className={styles.inputFile} style={{
                             backgroundImage: `url(${previewUrl})`,
