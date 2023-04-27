@@ -24,10 +24,6 @@ export default function Dashboard() {
                         Dados
                     </Link>
                     
-
-
-
-
                 </main>
             </div>
         </>

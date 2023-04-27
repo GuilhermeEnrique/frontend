@@ -49,18 +49,6 @@
     cursor: pointer;
 }
 
-.inputFile::before {
-    content: "Selecionar arquivo";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: transparent;
-    font-size: 1rem;
-    cursor: pointer;
-    background: url('../../../public/AddPhoto.png') no-repeat center center/contain;
-}
-
 
 .campanha {
     margin: 0 2rem;

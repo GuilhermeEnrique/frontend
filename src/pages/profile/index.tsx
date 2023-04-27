@@ -6,6 +6,7 @@ import { ButtonSave } from "../../components/ui/ButtonSave"
 import { ButtonCancel } from "../../components/ui/ButtonCancel"
 import styles from './styles.module.scss'
 import Link from "next/link"
+import { canSSRAuth } from "../../utils/canSSRAuth"
 
 export default function Profile() {
     return (
@@ -53,3 +54,10 @@ export default function Profile() {
         </>
     )
 }
+export const getServerSideProps = canSSRAuth(async (ctx) => {
+    return {
+        props: {
+
+        }
+    }
+})
