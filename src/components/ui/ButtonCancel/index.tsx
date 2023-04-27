@@ -18,9 +18,11 @@ export function ButtonCancel({ loading, children, ...rest }: ButtonProps) {
             {loading ? (
                 <FaSpinner color='#FFF' size={16} />
             ) : (
-                <a className={styles.buttonText}>
-                    {children}
-                </a>
+                <>
+                    <span className={styles.buttonText}>
+                        {children}
+                    </span>
+                </>
             )}
         </button>
     )
