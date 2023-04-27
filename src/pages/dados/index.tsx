@@ -2,11 +2,11 @@ import Head from "next/head";
 import { Header } from "../../components/Header";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 
-export default function FichaPersonagem() {
+export default function Dados() {
     return (
         <>
             <Head>
-                <title>Sobre nós - Dice-Roll</title>
+                <title>Dados - Dice-Roll</title>
             </Head>
             <div>
                 <Header />
