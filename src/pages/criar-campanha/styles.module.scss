@@ -1,0 +1,75 @@
+.container {
+    background-image: url('../../../public/Background.png');
+    background-size: cover;
+    background-position: center;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0;
+}
+
+.inputFile {
+    width: 100%;
+    height: 340px;
+    border: 0;
+    border-radius: 0.625rem;
+    background-color: var(--Light-1);
+    color: var(--dark-1);
+    padding: 1rem;
+    border: 1px solid var(--Dark-1);
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.inputFile input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+
+.campanha {
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: column;
+
+    button {
+        height: 40px;
+    }
+}
+
+.input {
+    margin-bottom: 1rem;
+    width: 400px;
+    height: 167px;
+    border: 0;
+    border-radius: 0.625rem;
+    background-color: var(--Light-1);
+    color: var(--dark-1);
+    padding: 1rem;
+    border: 1px solid var(--Dark-1);
+}
+
+.input::placeholder {
+    color: rgba (255, 255, 255, 0.8);
+}
