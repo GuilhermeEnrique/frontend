@@ -1,3 +1,4 @@
+import styles from './styles.module.scss'
 import Head from "next/head";
 import { Header } from "../../components/Header";
 import { canSSRAuth } from "../../utils/canSSRAuth";
@@ -10,7 +11,10 @@ export default function FichaPersonagem() {
             </Head>
             <div>
                 <Header />
-                <h1>Dados</h1>
+                <div className={styles.container}>
+                <h1>trocar de senha</h1>
+
+                </div>
             </div>
         </>
     )

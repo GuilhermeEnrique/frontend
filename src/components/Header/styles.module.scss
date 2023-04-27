@@ -16,6 +16,10 @@
     img {
         cursor: pointer;
     }
+    h1{
+        font-size: 30px;
+        font-weight: bold;
+    }
 }
 
 .menuNav {
@@ -23,6 +27,7 @@
     align-items: center;
 
     a {
+        font-size: 20px;
         color: var(--Dark);
         padding: 0 0.5rem;
         display: inline-block;

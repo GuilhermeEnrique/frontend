@@ -1,10 +1,9 @@
+.background {
+    background-color: aqua;
+}
+
 .container {
-    background-image: url('../../../public/Background.png');
-    background-size: cover;
-    background-position: center;
-    min-height: 72vh;
-    // max-width: 720px;
-    margin: 3rem auto;
+    margin: 2rem auto;
     padding: 0 2rem;
     display: flex;
     justify-content: center;
@@ -17,38 +16,14 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    font-size: 30px;
 }
 
 .form {
     display: flex;
     flex-direction: row;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
-
-.inputFile {
-    width: 100%;
-    height: 340px;
-    border: 0;
-    border-radius: 0.625rem;
-    background-color: var(--Light-1);
-    color: var(--dark-1);
-    padding: 1rem;
-    border: 1px solid var(--Dark-1);
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-}
-
-.inputFile input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-
 
 .campanha {
     margin: 0 2rem;
@@ -56,22 +31,13 @@
     flex-direction: column;
 
     button {
-        height: 40px;
+        width: 225px;
+        height: 102px;
+        cursor: pointer;
     }
 }
 
-.input {
-    margin-bottom: 1rem;
-    width: 400px;
-    height: 167px;
-    border: 0;
-    border-radius: 0.625rem;
-    background-color: var(--Light-1);
-    color: var(--dark-1);
-    padding: 1rem;
-    border: 1px solid var(--Dark-1);
-}
-
-.input::placeholder {
-    color: rgba (255, 255, 255, 0.8);
+.icon {
+    width: 30px;
+    height: 30px;
 }
