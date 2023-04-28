@@ -38,7 +38,7 @@ export default function FichaDePersonagem() {
             <div className={styles.gridContainer}>
                 <div className={styles.Header}>
                     <Header />
-                    <h2>Criar campanha</h2>
+                    <h2>Criar personagem</h2>
                 </div>
                 <div className={styles.Avatar}>
                     <label className={styles.labelAvatar}>
