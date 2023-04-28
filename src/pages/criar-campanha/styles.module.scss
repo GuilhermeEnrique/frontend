@@ -1,120 +1,27 @@
 .container {
-    min-height: 62vh;
-    max-width: auto;
-    margin: 1rem auto;
-    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 1px 1px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "Header Header"
+        "Avatar Form";
+}
 
+.Header {
+    grid-area: Header;
+}
+
+.Avatar {
+    grid-area: Avatar;
     display: flex;
-    justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
+    border: 1px solid;
 }
 
-.title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 1rem 0;
-    font-size: 25px;
-}
-
-.form {
-    display: flex;
-    flex-direction: row;
-    margin: 1rem 0;
-}
-
-.inputFile {
-    width: 100%;
-    height: 340px;
-    border: 0;
-    border-radius: 0.625rem;
-    background-color: var(--Light-1);
-    color: var(--dark-1);
-    padding: 1rem;
-    border: 1px solid var(--Dark-1);
-    align-items: center;
-    position: relative;
-    cursor: pointer;
-
-}
-
-.inputFile input[type="file"] {
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-}
-
-.campanha {
-    margin: 0 2rem;
+.Form {
+    grid-area: Form;
     display: flex;
     flex-direction: column;
-
-    button {
-        height: 40px;
-        cursor: pointer;
-    }
-
-    textarea {
-        resize: none;
-        height: 120px;
-        width: 100%;
-    }
-}
-
-.input::placeholder {
-    color: rgba (255, 255, 255, 0.8);
-}
-
-.labelAvatar {
-    width: 100%;
-    height: 280px;
-    background-color: var(--Light-1);
-    margin-bottom: 1rem;
-    border: 1px solid var(--Dark-1);
-    box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    input {
-        display: none;
-    }
-
-    span {
-        z-index: 99;
-        position: absolute;
-        opacity: 0.7;
-        transition: all 0.5s;
-    }
-
-    span:hover {
-        opacity: 1;
-        transform: scale(1.2);
-    }
-}
-
-.icon {
-    width: 100%;
-    height: 100px;
-    color: var(--Dark-1);
-}
-
-.dica {
-    color: var(--Dark-1);
-    font-weight: bold;
-}
-
-.preview {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
+    border: 1px solid;
 }
