@@ -36,7 +36,7 @@ export default function Profile() {
             <Head>
                 <title>Perfil - Dice-Roll</title>
             </Head>
-            <div>
+            <div className={styles.containerCenter}>
                 <Header />
                 <div className={styles.title}>
                     <h2>Perfil</h2>
@@ -71,19 +71,21 @@ export default function Profile() {
                             placeholder="Email"
                             type="text"
                         />
-                        <Link href="/trocar-senha">
-                            <ButtonEdit>
-                                Trocar de senha
-                            </ButtonEdit>
-                        </Link>
-                        <ButtonSave type="submit">
-                            Salvar
-                        </ButtonSave>
-                        <Link href="/">
-                            <ButtonCancel>
-                                Cancelar
-                            </ButtonCancel>
-                        </Link>
+                        <div className={styles.buttons}>
+                            <Link href="/trocar-senha">
+                                <ButtonEdit>
+                                    Trocar de senha
+                                </ButtonEdit>
+                            </Link>
+                            <ButtonSave type="submit">
+                                Salvar
+                            </ButtonSave>
+                            <Link href="/">
+                                <ButtonCancel>
+                                    Cancelar
+                                </ButtonCancel>
+                            </Link>
+                        </div>
                     </form>
                 </main>
             </div>

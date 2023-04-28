@@ -1,12 +1,21 @@
+.containerCenter {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../../public/Background.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%
+}
+
 .container {
     min-height: 82vh;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    background-image: url('../../../public/Background.png');
-    background-size: cover;
-    background-position: center;
-    flex-direction: row;
+    width: 100%;
+    height: 100%;
 }
 
 .campanhas {
@@ -22,14 +31,28 @@
     box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
     padding: 10rem 5rem;
     margin: 0px 20px 0px 20px;
+
+    z-index: 99;
+    opacity: 1;
+    transition: all 0.5s;
+
+    span {
+        color: var(--Light);
+        -webkit-text-stroke: 1px rgb(0, 0, 0);
+        font-size: 25px;
+    }
+}
+
+.campanhas:hover {
+    opacity: 1;
+    transform: scale(1.2);
 }
 
 .personagem {
     background: url('../../../public/Personagem.png') no-repeat center;
-    color: var(--Light);
     border: solid 1px var(--Dark);
     border-radius: 20px;
-    font-size: 20px;
+
     font-style: normal;
     font-weight: bold;
     line-height: 25px;
@@ -37,7 +60,20 @@
     box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
     padding: 10rem 5rem;
 
+    z-index: 99;
+    opacity: 1;
+    transition: all 0.5s;
 
+    span {
+        color: var(--Light);
+        -webkit-text-stroke: 1px black;
+        font-size: 25px;
+    }
+}
+
+.personagem:hover {
+    opacity: 1;
+    transform: scale(1.2);
 }
 
 .dados {
@@ -52,4 +88,19 @@
     text-align: center;
     box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
     padding: 10rem 6rem;
+
+    z-index: 99;
+    opacity: 1;
+    transition: all 0.5s;
+
+    span {
+        color: var(--Light);
+        -webkit-text-stroke: 1px black;
+        font-size: 25px;
+    }
+}
+
+.dados:hover {
+    opacity: 1;
+    transform: scale(1.2);
 }

@@ -37,6 +37,7 @@
     align-items: center;
     position: relative;
     cursor: pointer;
+
 }
 
 .inputFile input[type="file"] {
@@ -76,6 +77,7 @@
     background-color: var(--Light-1);
     margin-bottom: 1rem;
     border: 1px solid var(--Dark-1);
+    box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
     border-radius: 20px;
     display: flex;
     justify-content: center;

@@ -35,17 +35,14 @@ export default function FichaDePersonagem() {
             <Head>
                 <title>Ficha de Personagem - Dice-Roll</title>
             </Head>
-            <div>
+            <div className={styles.containerCenter}>
                 <Header />
-                <h1>Ficha de personagem</h1>
-            </div>
-            <main className={styles.container}>
-                <form className={styles.form}>
-                    <div className={styles.Avatar}>
+                <h1 className={styles.title}>Ficha de personagem</h1>
+                <main className={styles.container}>
+                    <form className={styles.form}>
                         <label className={styles.labelAvatar}>
                             <span>
                                 <FiCamera className={styles.icon} />
-                                <p className={styles.dica}>Tamanho recomendado: 535 x 278 </p>
                             </span>
                             <input type="file" accept="image/png, image/jpeg" onChange={handleFile} />
                             {avatarUrl && (
@@ -58,43 +55,43 @@ export default function FichaDePersonagem() {
                                 />
                             )}
                         </label>
-                    </div>
-                    <div className={styles.register}>
-                        <Input type="number" placeholder="Pontos de vida" />
-                        <Input placeholder="Nome do personagem" />
-                        <TextArea placeholder="Descrição" />
-                        <Input placeholder="Raça" />
-                        <Input placeholder="Nível" />
-                        <Input placeholder="Classe" />
-                        <select>
-                            <option>O retorno do rei</option>
-                            <option>As Masmorras</option>
-                        </select>
-                    </div>
-                    <div className={styles.buttons}>
-                        <Link href="/">
-                            <ButtonEdit>
-                                Atributos
-                            </ButtonEdit>
-                        </Link>
-                        <Link href="/">
-                            <ButtonEdit>
-                                Inventário
-                            </ButtonEdit>
-                        </Link>
-                    </div>
-                    <div className={styles.Salvar}>
-                        <ButtonSave type="submit">
-                            Salvar
-                        </ButtonSave>
-                        <Link href="/">
-                            <ButtonCancel>
-                                Cancelar
-                            </ButtonCancel>
-                        </Link>
-                    </div>
-                </form>
-            </main>
+                        <div className={styles.register}>
+                            <Input type="number" placeholder="Pontos de vida" />
+                            <Input placeholder="Nome do personagem" />
+                            <TextArea placeholder="Descrição" />
+                            <Input placeholder="Raça" />
+                            <Input placeholder="Nível" />
+                            <Input placeholder="Classe" /> <br />
+                            <select className={styles.input}>
+                                <option>O retorno do rei</option>
+                                <option>As Masmorras</option>
+                            </select>
+                        </div>
+                        <div className={styles.buttons}>
+                            <Link href="/">
+                                <ButtonEdit>
+                                    Atributos
+                                </ButtonEdit>
+                            </Link>
+                            <Link href="/">
+                                <ButtonEdit>
+                                    Inventário
+                                </ButtonEdit>
+                            </Link>
+                        </div>
+                        <div className={styles.Salvar}>
+                            <ButtonSave type="submit">
+                                Salvar
+                            </ButtonSave>
+                            <Link href="/">
+                                <ButtonCancel>
+                                    Cancelar
+                                </ButtonCancel>
+                            </Link>
+                        </div>
+                    </form>
+                </main>
+            </div>
         </>
     )
 }

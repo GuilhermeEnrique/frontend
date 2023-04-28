@@ -10,20 +10,22 @@ export default function Dashboard() {
             <Head>
                 <title>Inicio - Dice-Roll</title>
             </Head>
-            <div>
+            <div className={styles.containerCenter}>
                 <Header />
                 <main className={styles.container}>
-                    
-                    <Link className={styles.personagem} href='/ficha-de-personagem'>
-                        Fichas<br /> de <br />personagens
+                    <Link className={styles.personagem} href='/personagens'>
+                        <span>Fichas <br />de<br />personagens</span>
                     </Link>
                     <Link className={styles.campanhas} href='/campanhas'>
-                        Campanhas
+                        <span>
+                            Campanhas
+                        </span>
                     </Link>
                     <Link className={styles.dados} href='/dados'>
-                        Dados
+                        <span>
+                            Dados
+                        </span>
                     </Link>
-                    
                 </main>
             </div>
         </>

@@ -20,23 +20,22 @@ export default function Campanhas() {
             </Head>
             <div className={styles.containerCenter}>
                 <Header />
-                <div className={styles.container}>
+
+                <main className={styles.container}>
                     <div className={styles.title}>
-                        <h2>Suas campanhas</h2>
+                        <h2>Seu personagem</h2>
                     </div>
-                    <div className={styles.form}>
-                        <form>
-                            <div className={styles.campanha}>
-                                <Link href="/criar-campanha">
-                                    <ButtonEdit>
-                                        <FiPlusCircle className={styles.icon} /> <br />
-                                        Criar campanha
-                                    </ButtonEdit>
-                                </Link>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                    <form className={styles.form}>
+                        <div className={styles.campanha}>
+                            <Link href="/criar-personagem">
+                                <ButtonEdit>
+                                    <FiPlusCircle className={styles.icon} /> <br />
+                                    Criar personagem
+                                </ButtonEdit>
+                            </Link>
+                        </div>
+                    </form>
+                </main>
             </div>
         </>
     )
