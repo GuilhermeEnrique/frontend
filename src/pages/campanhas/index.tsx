@@ -6,6 +6,7 @@ import { Input } from "../../components/ui/Input"
 import { ButtonSave } from "../../components/ui/ButtonSave"
 import { ButtonEdit } from "../../components/ui/ButtonEdit"
 import { setupAPIClient } from "../../services/api"
+import { FiRefreshCcw } from "react-icons/fi";
 import styles from './styles.module.scss'
 import Link from "next/link"
 import { toast } from "react-toastify"
@@ -23,9 +24,9 @@ export default function Campanhas() {
                 <div className={styles.container}>
                     <div className={styles.title}>
                         <h2>Suas campanhas</h2>
+                        <span> <FiRefreshCcw/> </span>
                     </div>
                     <div className={styles.form}>
-                        <form>
                             <div className={styles.campanha}>
                                 <Link href="/criar-campanha">
                                     <ButtonEdit>
@@ -34,7 +35,6 @@ export default function Campanhas() {
                                     </ButtonEdit>
                                 </Link>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>

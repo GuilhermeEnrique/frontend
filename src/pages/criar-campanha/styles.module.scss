@@ -7,6 +7,8 @@
     grid-template-areas:
         "Header Header"
         "Avatar Form";
+    justify-content: center;
+    align-items: center;
 }
 
 .Header {
@@ -17,11 +19,19 @@
     grid-area: Avatar;
     display: flex;
     border: 1px solid;
+    border-radius: 20px;
+    width: 50%;
 }
 
 .Form {
     grid-area: Form;
     display: flex;
+    justify-content: center;
     flex-direction: column;
     border: 1px solid;
+
+    textarea{
+        resize: none;
+        height: 120px;
+    }
 }

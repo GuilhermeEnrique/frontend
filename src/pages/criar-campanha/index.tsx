@@ -1,37 +1,19 @@
 import Head from "next/head"
-import { ChangeEvent, FormEvent, useState } from 'react'
-import { Header } from "../../components/Header"
-import { Input, TextArea } from "../../components/ui/Input"
-import { ButtonSave } from "../../components/ui/ButtonSave"
-import { ButtonCancel } from "../../components/ui/ButtonCancel"
-import { setupAPIClient } from "../../services/api"
 import styles from './styles.module.scss'
 import Link from "next/link"
-import { toast } from "react-toastify"
+import { ButtonCancel } from "../../components/ui/ButtonCancel"
+import { ButtonSave } from "../../components/ui/ButtonSave"
 import { canSSRAuth } from "../../utils/canSSRAuth"
+import { ChangeEvent, FormEvent, useState } from 'react'
 import { FiCamera } from "react-icons/fi"
+import { Header } from "../../components/Header"
+import { Input, TextArea } from "../../components/ui/Input"
+import { setupAPIClient } from "../../services/api"
+import { toast } from "react-toastify"
 
 export default function Campanhas() {
-    const [titulo, setTitulo] = useState('')
-    const [descricao, setDescricao] = useState('')
-
-    async function handleRegister(event: FormEvent) {
-        event.preventDefault();
-
-        if (titulo === '') {
-            return
-        }
-        const apiClient = setupAPIClient();
-        await apiClient.post('/campanha', {
-            titulo: titulo,
-            descricao: descricao
-        })
-
-        toast.success("Campanha criada com sucesso!")
-        setTitulo('');
-        setDescricao('');
-    }
-
+    const [title, setTitle] = useState('')
+    const [description, setDescription] = useState('')
     const [avatarUrl, setAvatarUrl] = useState('')
     const [imageAvatar, setImageAvatar] = useState(null)
 
@@ -52,13 +34,42 @@ export default function Campanhas() {
         }
     }
 
+    async function handleRegister(event: FormEvent) {
+        event.preventDefault();
+        try {
+            const data = new FormData();
+
+            if (title === '' || description === '' || imageAvatar === null) {
+                toast.error("Preencha todos os campos");
+                return
+            }
+
+            data.append('title', title);
+            data.append('description', description);
+            data.append('file', imageAvatar);
+
+            const apiClient = setupAPIClient();
+
+            await apiClient.post('/campanha', data)
+            toast.success("Campanha criada com sucesso!")
+        } catch (err) {
+            console.log(err);
+            toast.error("Ops, erro ao cadastrar. . . ");
+        }
+
+        setTitle('');
+        setDescription('');
+        setAvatarUrl(null);
+        setImageAvatar(null);
+    }
+
     return (
         <>
             <Head>
                 <title>Campanhas - Dice-Roll</title>
             </Head>
-            <div className={styles.containerCenter}>
-                <form className={styles.form} onSubmit={handleRegister}>
+            <form className={styles.form} onSubmit={handleRegister}>
+                <div className={styles.containerCenter}>
                     <div className={styles.Header}>
                         <Header />
                         <h2>Criar campanha</h2>
@@ -83,13 +94,13 @@ export default function Campanhas() {
                     <div className={styles.Form}><Input
                         placeholder="Título"
                         type="text"
-                        value={titulo}
-                        onChange={(e) => setTitulo(e.target.value)}
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                     />
                         <TextArea
                             placeholder="Descrição"
-                            value={descricao}
-                            onChange={(e) => setDescricao(e.target.value)}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
                         />
                         <ButtonSave type="submit">
                             Salvar
@@ -99,15 +110,14 @@ export default function Campanhas() {
                                 Cancelar
                             </ButtonCancel>
                         </Link></div>
-                </form>
-            </div>
+                </div>
+            </form>
         </>
     )
 }
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     return {
         props: {
-
         }
     }
 })
