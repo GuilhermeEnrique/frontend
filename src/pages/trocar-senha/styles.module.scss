@@ -1,0 +1,32 @@
+.containerCenter {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../../../public/Background.png');
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+
+
+    button {
+        height: 40px;
+    }
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 25px;
+    margin: 1rem 1rem;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
