@@ -1,68 +1,70 @@
 .gridContainer {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    // grid-template-rows: 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas:
-        "Header Header Header Header"
-        "Avatar Avatar Form Form"
-        ". Buttons Buttons .";
+    display: flex;
+    flex-direction: column;
     background-image: url('../../../public/Background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-}
 
-.Header {
-    grid-area: Header;
+    justify-content: center;
+    align-items: center;
 
     h2 {
         font-size: 25px;
+        justify-content: center;
         text-align: center;
         margin: 1rem;
     }
-}
 
-.Avatar {
-    grid-area: Avatar;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem;
-}
-
-.Form {
-    grid-area: Form;
-    display: flex;
-    flex-direction: column;
-    margin: 1rem 1rem;
-    justify-content: center;
-
-    textarea {
+    select {
         width: 100%;
-        resize: none;
-        height: 180px;
+        margin-bottom: 1rem;
+        height: 50px;
+        padding: 5px;
     }
 
     input {
         width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    textarea {
+        width: 100%;
+        resize: none;
+        height: 120px;
+    }
+
+
+    label {
+        display: flex;
+        height: 80%;
     }
 }
 
-.Buttons {
-    grid-area: Buttons;
+.Header {
+    display: flex;
+    flex-direction: column;
+}
+
+.Conteudo {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 1rem;
+    width: 50%;
     justify-content: center;
     align-items: center;
+}
 
-    button {
-        width: 100%;
-    }
+.Avatar {
+    background-color: #f50b0b;
+    display: flex;
+    width: 100%;
 }
 
 .labelAvatar {
-    width: 100%;
     height: 100%;
-    background-color: var(--Light-1);
+    width: 100%;
+    background-color: #f50b0b;
     border: 1px solid var(--Dark-1);
     box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
     border-radius: 20px;
@@ -101,17 +103,23 @@
 
 .preview {
     width: 100%;
-    height: 100%;
     object-fit: cover;
     border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 1rem;
 }
 
-.input {
+.form {
+    display: flex;
+    margin: 1rem 1rem;
     width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.select {
     height: 60px;
     border: 0;
     border-radius: 0.625rem;
@@ -120,4 +128,13 @@
     padding: 1rem;
     border: 1px solid var(--Dark-1);
     box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
+}
+
+.buttons {
+    display: flex;
+
+    button {
+        height: 50px;
+        margin-right: 20px;
+    }
 }
