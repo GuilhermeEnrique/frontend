@@ -16,10 +16,20 @@
     img {
         cursor: pointer;
     }
-    h1{
+
+    h1 {
         font-size: 30px;
         font-weight: bold;
     }
+
+    h1::first-letter {
+        text-transform: capitalize;
+    }
+
+    span {
+        text-transform: capitalize;
+    }
+
 }
 
 .menuNav {

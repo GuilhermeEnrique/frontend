@@ -16,10 +16,9 @@ export function Header() {
                 <Link href="/dashboard">
                     <img src="/Icon-Dice-Roll.svg" alt="Logo Dice Roll" width={80} height={80} />
                 </Link>
-                <h1>Olá{', ' + user?.name} </h1>
+                <h1>olá, <span>{user?.name.charAt(0)}</span>{user?.name.slice(1)}</h1>
 
                 <nav className={styles.menuNav}>
-
                     <Link href="/profile">
                         Perfil
                     </Link>
