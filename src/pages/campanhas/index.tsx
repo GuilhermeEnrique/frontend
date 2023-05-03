@@ -1,16 +1,16 @@
 import Head from "next/head"
-import { FormEvent, useState } from 'react'
-import { Header } from "../../components/Header"
-import { FiPlusCircle } from "react-icons/fi";
-import { Input } from "../../components/ui/Input"
-import { ButtonSave } from "../../components/ui/ButtonSave"
-import { ButtonEdit } from "../../components/ui/ButtonEdit"
-import { setupAPIClient } from "../../services/api"
-import { FiRefreshCcw } from "react-icons/fi";
-import styles from './styles.module.scss'
 import Link from "next/link"
-import { toast } from "react-toastify"
+import Modal from 'react-modal';
+import styles from './styles.module.scss'
+
+import { ButtonEdit } from "../../components/ui/ButtonEdit"
 import { canSSRAuth } from "../../utils/canSSRAuth";
+import { Header } from "../../components/Header"
+import { ModalCampanha } from "../../components/ModalCampanha";
+import { FiPlusCircle } from "react-icons/fi";
+import { FiRefreshCcw } from "react-icons/fi";
+import { setupAPIClient } from "../../services/api"
+import { useState } from 'react'
 
 type CampanhaProps = {
     id: string,
@@ -23,50 +23,88 @@ interface CampanhasProps {
     campanhas: CampanhaProps[];
 }
 
+export type CampanhaItemProps = {
+    id: string;
+    title: string;
+    description: string;
+    banner: string;
+    characters: {
+        id: string;
+        name: string;
+        classe: string;
+        race: string;
+    }
+}
+
 export default function Campanhas({ campanhas }: CampanhasProps) {
     const [campanhaList, setCampanhaList] = useState(campanhas || [])
+    const [modalItem, setModalItem] = useState<CampanhaItemProps[]>()
+    const [modalVisible, setModalVisible] = useState(false)
 
-    function handleOpenModalView(id: string){
-        alert("id clicado " + id)
+    function handleCloseModal() {
+        setModalVisible(false);
     }
+
+    async function handleOpenModalView(id: string) {
+        const apiClient = setupAPIClient();
+
+        const response = await apiClient.get('/campanha', {
+            params: {
+                id: id,
+            }
+        })
+
+        setModalItem(response.data);
+        setModalVisible(true)
+
+    }
+
+    Modal.setAppElement('#__next');
+
     return (
         <>
             <Head>
                 <title>Campanhas - Dice-Roll</title>
             </Head>
-            <div className={styles.containerCenter}>
+            <div className={styles.containerCenter} >
                 <Header />
-                <div className={styles.container}>
+                <main className={styles.container}>
                     <div className={styles.title}>
-                        <h2>Suas campanhas</h2><span> <FiRefreshCcw /> </span>
-
+                        <h2>Suas campanhas</h2>
+                        <button>
+                            <FiRefreshCcw size={30} />
+                        </button>
                     </div>
-                    <div className={styles.form}>
-                        <div className={styles.campanha}>
-                            <article className={styles.listCampanhas}>
-                                {campanhaList.map(item => (
-                                    <section className={styles.campanha}>
-                                        <button onClick={()=> handleOpenModalView(item.id)}>
-                                            <div className={styles.tag}></div>
-                                            <span>{item.title}</span>
-                                        </button>
-                                    </section>
-                                ))}
-                            </article>
+                    <div className={styles.campanhas}>
+                        <article className={styles.listCampanhas}>
+                            {campanhaList.map(item => (
+                                <section key={item.id} className={styles.selectCampanha}>
+                                    <button onClick={() => handleOpenModalView(item.id)}>
+                                        <span>{item.title}</span>
+                                    </button>
+                                </section>
+                            ))}
+                        </article>
 
-                            <Link href="/criar-campanha">
-                                <ButtonEdit>
-                                    <FiPlusCircle className={styles.icon} /> <br />
-                                    Criar campanha
-                                </ButtonEdit>
-                            </Link>
-                        </div>
+                        <Link href="/criar-campanha">
+                            <ButtonEdit>
+                                <FiPlusCircle className={styles.icon} /> <br />
+                                Criar campanha
+                            </ButtonEdit>
+                        </Link>
                     </div>
-                </div>
+                </main>
+
+                {modalVisible && (
+                    <ModalCampanha
+
+                    />
+                )}
             </div>
         </>
     )
 }
+
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 

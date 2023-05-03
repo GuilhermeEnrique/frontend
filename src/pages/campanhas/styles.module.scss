@@ -13,38 +13,81 @@
     margin: 2rem auto;
     padding: 0 2rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
 }
 
 .title {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    font-size: 25px;
-}
-
-.form {
-    display: flex;
     flex-direction: row;
-    margin: 2rem 0;
+    font-size: 25px;
+
+    button {
+        margin-left: 1rem;
+        border: 0;
+        color: var(--Secundary);
+        background: transparent;
+        cursor: pointer;
+    }
 }
 
-.campanha {
-    margin: 0 2rem;
+.campanhas {
     display: flex;
     flex-direction: column;
+    margin: 2rem 0;
+    align-items: center;
 
     button {
         width: 225px;
         height: 102px;
         cursor: pointer;
+        box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
     }
+
+    span {
+        text-transform: capitalize;
+    }
+
 }
 
 .icon {
     width: 30px;
     height: 30px;
+}
+
+.listCampanhas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 20px;
+    flex-direction: row;
+    margin-bottom: 2rem;
+
+    span {
+        color: var(--Secundary);
+        -webkit-text-stroke: 1px rgb(0, 0, 0);
+        font-size: 25px;
+    }
+}
+
+.selectCampanha {   
+    margin: 0 2rem;
+    z-index: 99;
+    opacity: 1;
+    transition: all 0.5s;
+
+    button {
+        background: transparent;
+        border-radius: 20px;
+        height: 180px;
+        align-items: center;
+    }
+
+}
+
+.selectCampanha:hover {
+    opacity: 1;
+    transform: scale(1.2);
 }
