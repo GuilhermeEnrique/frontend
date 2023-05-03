@@ -68,17 +68,16 @@ export default function Campanhas() {
             <Head>
                 <title>Campanhas - Dice-Roll</title>
             </Head>
-            <form className={styles.form} onSubmit={handleRegister}>
-                <div className={styles.containerCenter}>
-                    <div className={styles.Header}>
-                        <Header />
-                        <h2>Criar campanha</h2>
-                    </div>
-                    <div className={styles.Avatar}>
+            <div className={styles.containerCenter} >
+                <Header />
+                <div className={styles.title}>
+                    <h2>Criar campanha</h2>
+                </div>
+                <main className={styles.container}>
+                    <form className={styles.form} onSubmit={handleRegister}>
                         <label className={styles.labelAvatar}>
                             <span>
                                 <FiCamera className={styles.icon} />
-                                <p className={styles.dica}>Tamanho recomendado: 535 x 278 </p>
                             </span>
                             <input type="file" accept="image/png, image/jpeg" onChange={handleFile} />
                             {avatarUrl && (
@@ -90,13 +89,13 @@ export default function Campanhas() {
                                     height={250}
                                 />
                             )}
-                        </label></div>
-                    <div className={styles.Form}><Input
-                        placeholder="Título"
-                        type="text"
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
-                    />
+                        </label>
+                        <Input
+                            placeholder="Título"
+                            type="text"
+                            value={title}
+                            onChange={(e) => setTitle(e.target.value)}
+                        />
                         <TextArea
                             placeholder="Descrição"
                             value={description}
@@ -109,9 +108,10 @@ export default function Campanhas() {
                             <ButtonCancel>
                                 Cancelar
                             </ButtonCancel>
-                        </Link></div>
-                </div>
-            </form>
+                        </Link>
+                    </form>
+                </main>
+            </div >
         </>
     )
 }
