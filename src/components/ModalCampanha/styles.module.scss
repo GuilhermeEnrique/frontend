@@ -1,0 +1,31 @@
+.container {
+    width: 620px;
+    background-color: var(--Secundary);
+    color: var(--Light);
+
+    h2 {
+        margin: 1rem 0;
+    }
+}
+
+.containerItem {
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+}
+
+.description {
+    margin-top: 0.5rem;
+    word-break: keep-all;
+    text-align: justify;
+    margin-bottom: 0.5rem;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+.title{
+    text-transform: capitalize;
+}

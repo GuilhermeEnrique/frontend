@@ -29,23 +29,25 @@ export type CampanhaItemProps = {
     description: string;
     banner: string;
     characters: {
+        map(arg0: (character: any) => JSX.Element): import("react").ReactNode;
         id: string;
         name: string;
-        classe: string;
-        race: string;
     }
 }
 
 export default function Campanhas({ campanhas }: CampanhasProps) {
+
     const [campanhaList, setCampanhaList] = useState(campanhas || [])
+
     const [modalItem, setModalItem] = useState<CampanhaItemProps[]>()
-    const [modalVisible, setModalVisible] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false);
 
     function handleCloseModal() {
         setModalVisible(false);
     }
 
     async function handleOpenModalView(id: string) {
+
         const apiClient = setupAPIClient();
 
         const response = await apiClient.get('/campanha', {
@@ -53,9 +55,9 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
                 id: id,
             }
         })
-
+        console.log(response.data)
         setModalItem(response.data);
-        setModalVisible(true)
+        setModalVisible(true);
 
     }
 
@@ -97,7 +99,9 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
 
                 {modalVisible && (
                     <ModalCampanha
-
+                        isOpen={modalVisible}
+                        onRequestClose={handleCloseModal}
+                        campanha={modalItem}
                     />
                 )}
             </div>

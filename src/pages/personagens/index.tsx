@@ -2,8 +2,6 @@ import Head from "next/head"
 import { FormEvent, useState } from 'react'
 import { Header } from "../../components/Header"
 import { FiPlusCircle } from "react-icons/fi";
-import { Input } from "../../components/ui/Input"
-import { ButtonSave } from "../../components/ui/ButtonSave"
 import { ButtonEdit } from "../../components/ui/ButtonEdit"
 import { setupAPIClient } from "../../services/api"
 import styles from './styles.module.scss'
