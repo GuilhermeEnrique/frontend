@@ -33,20 +33,20 @@ export function ModalCampanha({ isOpen, onRequestClose, campanha }: ModalCampanh
             onRequestClose={onRequestClose}
             style={customStyles}
         >
+            <div className={styles.buttons}>
             <Link href='/editar-campanha'>
-                <button style={{ background: 'transparent', border: 0, cursor: 'pointer' }}>
+                <button className={styles.icon}>
                     <FiEdit size={40} color="var(--Primary)" />
                 </button>
             </Link>
             <button
                 type="button"
                 onClick={onRequestClose}
-                className="react-modal-close"
-                style={{ background: 'transparent', border: 0, cursor: 'pointer' }}
+                className={styles.icon}
             >
                 <FiX size={40} color="var(--Danger)" />
             </button>
-            
+            </div>
             <div className={styles.container}>
                 <h2>Detalhes da campanha</h2>
                 <span className={styles.table}>

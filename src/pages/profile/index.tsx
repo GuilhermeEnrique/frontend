@@ -70,7 +70,6 @@ export default function Profile() {
                     <h2>Perfil</h2>
                 </div>
                 <main className={styles.container}>
-
                     <form className={styles.form} onSubmit={handleRegister}>
                         <label className={styles.labelAvatar}>
                             <span>

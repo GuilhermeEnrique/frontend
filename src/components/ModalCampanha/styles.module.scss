@@ -5,6 +5,24 @@
 
     h2 {
         margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around
+}
+
+.icon {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    :hover{
+        opacity: 0.5;
+        transform: scale(0.9);
     }
 }
 
@@ -26,6 +44,19 @@
     flex-direction: column;
     margin: 1rem 0;
 }
-.title{
+
+.title {
     text-transform: capitalize;
+}
+
+@media screen and (max-width: 760px) {
+    .container {
+        width: 430px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .container {
+        width: 300px;
+    }
 }

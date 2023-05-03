@@ -102,91 +102,83 @@ export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
             <Head>
                 <title>Ficha de Personagem - Dice-Roll</title>
             </Head>
-            <div>
+            <div className={styles.containerCenter} >
                 <Header />
-                <main className={styles.gridContainer}>
+                <div className={styles.title}>
                     <h2>Criar personagem</h2>
+                </div>
+                <main className={styles.container}>
+                    <form className={styles.form} onSubmit={handleRegister}>
+                        <label className={styles.labelAvatar}>
+                            <span>
+                                <FiCamera className={styles.icon} />
+                            </span>
+                            <input type="file" accept="image/png, image/jpeg" onChange={handleFile} />
 
-                    <form className={styles.Header} onSubmit={handleRegister}>
-                        <div className={styles.Conteudo}>
-                            <div className={styles.Avatar}>
-                                <label className={styles.labelAvatar}>
-                                    <span>
-                                        <FiCamera className={styles.icon} />
-                                    </span>
-                                    <input type="file" accept="image/png, image/jpeg" onChange={handleFile} />
+                            {avatarUrl && (
+                                <img
+                                    className={styles.preview}
+                                    src={avatarUrl}
+                                    alt="Foto do usuário"
+                                    width={250}
+                                    height={250}
+                                />
+                            )}
+                        </label>
 
-                                    {avatarUrl && (
-                                        <img
-                                            className={styles.preview}
-                                            src={avatarUrl}
-                                            alt="Foto do usuário"
-                                            width={250}
-                                            height={250}
-                                        />
-                                    )}
-                                </label>
-                            </div>
+                        <select value={campanhaSelected} className={styles.select} onChange={handleChangeCampanha}>
+                            {campanhas.map((item, index) => {
+                                return (
+                                    <option key={item.id} value={index}>
+                                        {item.title}
+                                    </option>
+                                )
+                            })}
+                        </select>
 
-                            <div className={styles.form}>
-                                <select value={campanhaSelected} className={styles.select} onChange={handleChangeCampanha}>
-                                    {campanhas.map((item, index) => {
-                                        return (
-                                            <option key={item.id} value={index}>
-                                                {item.title}
-                                            </option>
-                                        )
-                                    })}
-                                </select>
-
-                                <Input
-                                    type="number"
-                                    placeholder="Pontos de vida"
-                                    value={life}
-                                    onChange={(e) => setLife(e.target.value)}
-                                />
-                                <Input
-                                    type="number"
-                                    placeholder="Nível"
-                                    value={level}
-                                    onChange={(e) => setLevel(e.target.value)}
-                                />
-                                <Input
-                                    type="text"
-                                    placeholder="Nome do personagem"
-                                    value={name}
-                                    onChange={(e) => setName(e.target.value)}
-                                />
-                                <TextArea
-                                    placeholder="Descrição"
-                                    value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
-                                />
-                                <Input
-                                    type="text"
-                                    placeholder="Raça"
-                                    value={race}
-                                    onChange={(e) => setRace(e.target.value)}
-                                />
-                                <Input
-                                    type="text"
-                                    placeholder="Classe"
-                                    value={classe}
-                                    onChange={(e) => setClasse(e.target.value)}
-                                />
-
-                            </div>
-                        </div>
-                        <div className={styles.buttons}>
-                            <ButtonSave type="submit">
-                                Salvar
-                            </ButtonSave>
-                            <Link href="/">
-                                <ButtonCancel>
-                                    Cancelar
-                                </ButtonCancel>
-                            </Link>
-                        </div>
+                        <Input
+                            type="number"
+                            placeholder="Pontos de vida"
+                            value={life}
+                            onChange={(e) => setLife(e.target.value)}
+                        />
+                        <Input
+                            type="number"
+                            placeholder="Nível"
+                            value={level}
+                            onChange={(e) => setLevel(e.target.value)}
+                        />
+                        <Input
+                            type="text"
+                            placeholder="Nome do personagem"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                        />
+                        <TextArea
+                            placeholder="Descrição"
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+                        <Input
+                            type="text"
+                            placeholder="Raça"
+                            value={race}
+                            onChange={(e) => setRace(e.target.value)}
+                        />
+                        <Input
+                            type="text"
+                            placeholder="Classe"
+                            value={classe}
+                            onChange={(e) => setClasse(e.target.value)}
+                        />
+                        <ButtonSave type="submit">
+                            Salvar
+                        </ButtonSave>
+                        <Link href="/">
+                            <ButtonCancel>
+                                Cancelar
+                            </ButtonCancel>
+                        </Link>
                     </form >
                 </main>
             </div>
