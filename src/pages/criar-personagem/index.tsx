@@ -171,14 +171,17 @@ export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
                             value={classe}
                             onChange={(e) => setClasse(e.target.value)}
                         />
-                        <ButtonSave type="submit">
-                            Salvar
-                        </ButtonSave>
-                        <Link href="/">
-                            <ButtonCancel>
-                                Cancelar
-                            </ButtonCancel>
-                        </Link>
+                        <div className={styles.buttons}>
+                            <ButtonSave type="submit">
+                                Salvar
+                            </ButtonSave>
+                            <Link href="/">
+                                <ButtonCancel>
+                                    Cancelar
+                                </ButtonCancel>
+                            </Link>
+                        </div>
+
                     </form >
                 </main>
             </div>

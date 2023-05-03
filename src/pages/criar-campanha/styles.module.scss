@@ -101,3 +101,13 @@
     object-fit: cover;
     border-radius: 20px;
 }
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    width: 535px;
+
+    button {
+        height: 50px;
+    }
+}

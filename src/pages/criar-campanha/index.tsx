@@ -101,14 +101,17 @@ export default function Campanhas() {
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
-                        <ButtonSave type="submit">
-                            Salvar
-                        </ButtonSave>
-                        <Link href="/campanhas">
-                            <ButtonCancel>
-                                Cancelar
-                            </ButtonCancel>
-                        </Link>
+                        <div className={styles.buttons}>
+                            <ButtonSave type="submit">
+                                Salvar
+                            </ButtonSave>
+                            <Link href="/campanhas">
+                                <ButtonCancel>
+                                    Cancelar
+                                </ButtonCancel>
+                            </Link>
+                        </div>
+
                     </form>
                 </main>
             </div >

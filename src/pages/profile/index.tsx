@@ -6,13 +6,26 @@ import { ButtonEdit } from "../../components/ui/ButtonEdit"
 import { ButtonSave } from "../../components/ui/ButtonSave"
 import { ButtonCancel } from "../../components/ui/ButtonCancel"
 import { canSSRAuth } from "../../utils/canSSRAuth"
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useContext, useState } from 'react'
 import styles from './styles.module.scss'
 import Link from "next/link"
 import { toast } from "react-toastify";
 import { setupAPIClient } from "../../services/api";
+import { AuthContext } from "../../contexts/AuthContext";
 
-export default function Profile() {
+type UserProps = {
+    id: string,
+    title: string,
+    description: string,
+    banner: string
+}
+
+interface AboutProps {
+    usuarios: UserProps[];
+}
+
+export default function Profile({ usuarios }: AboutProps) {
+
     const [name, setName] = useState('')
     const [biografia, setBiografia] = useState('')
     const [email, setEmail] = useState('')
@@ -74,7 +87,6 @@ export default function Profile() {
                         <label className={styles.labelAvatar}>
                             <span>
                                 <FiCamera className={styles.icon} />
-                                <p className={styles.dica}>Tamanho recomendado: 535 x 278 </p>
                             </span>
                             <input type="file" accept="image/png, image/jpeg" onChange={handleFile} />
                             {avatarUrl && (
@@ -90,18 +102,18 @@ export default function Profile() {
                         <Input
                             placeholder="Nome"
                             type="text"
-                            value={name}
+                            value={''}
                             onChange={(e) => setName(e.target.value)}
                         />
                         <TextArea
                             placeholder="Biografia"
-                            value={biografia}
+                            value={''}
                             onChange={(e) => setBiografia(e.target.value)}
                         />
                         <Input
                             placeholder="Email"
                             type="text"
-                            value={email}
+                            value={''}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                         <div className={styles.buttons}>
@@ -125,10 +137,16 @@ export default function Profile() {
         </>
     )
 }
+
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+    const apiClient = setupAPIClient(ctx)
+
+    const response = await apiClient.get('/about');
+
+    console.log(response.data)
     return {
         props: {
-
+            usuario: response.data
         }
     }
 })
