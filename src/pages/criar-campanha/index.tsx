@@ -105,7 +105,7 @@ export default function Campanhas() {
                         <ButtonSave type="submit">
                             Salvar
                         </ButtonSave>
-                        <Link href="/">
+                        <Link href="/campanhas">
                             <ButtonCancel>
                                 Cancelar
                             </ButtonCancel>

@@ -12,8 +12,23 @@ import Link from "next/link"
 import { toast } from "react-toastify"
 import { canSSRAuth } from "../../utils/canSSRAuth";
 
-export default function Campanhas() {
+type CampanhaProps = {
+    id: string,
+    title: string,
+    description: string,
+    banner: string
+}
 
+interface CampanhasProps {
+    campanhas: CampanhaProps[];
+}
+
+export default function Campanhas({ campanhas }: CampanhasProps) {
+    const [campanhaList, setCampanhaList] = useState(campanhas || [])
+
+    function handleOpenModalView(id: string){
+        alert("id clicado " + id)
+    }
     return (
         <>
             <Head>
@@ -23,18 +38,29 @@ export default function Campanhas() {
                 <Header />
                 <div className={styles.container}>
                     <div className={styles.title}>
-                        <h2>Suas campanhas</h2>
-                        <span> <FiRefreshCcw/> </span>
+                        <h2>Suas campanhas</h2><span> <FiRefreshCcw /> </span>
+
                     </div>
                     <div className={styles.form}>
-                            <div className={styles.campanha}>
-                                <Link href="/criar-campanha">
-                                    <ButtonEdit>
-                                        <FiPlusCircle className={styles.icon} /> <br />
-                                        Criar campanha
-                                    </ButtonEdit>
-                                </Link>
-                            </div>
+                        <div className={styles.campanha}>
+                            <article className={styles.listCampanhas}>
+                                {campanhaList.map(item => (
+                                    <section className={styles.campanha}>
+                                        <button onClick={()=> handleOpenModalView(item.id)}>
+                                            <div className={styles.tag}></div>
+                                            <span>{item.title}</span>
+                                        </button>
+                                    </section>
+                                ))}
+                            </article>
+
+                            <Link href="/criar-campanha">
+                                <ButtonEdit>
+                                    <FiPlusCircle className={styles.icon} /> <br />
+                                    Criar campanha
+                                </ButtonEdit>
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,9 +68,14 @@ export default function Campanhas() {
     )
 }
 export const getServerSideProps = canSSRAuth(async (ctx) => {
+    const apiClient = setupAPIClient(ctx)
+
+    const response = await apiClient.get('/campanha');
+
+    // console.log(response.data);
     return {
         props: {
-
+            campanhas: response.data
         }
     }
 })
