@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from './styles.module.scss'
 import Link from "next/link";
 import { ButtonCancel } from "../../components/ui/ButtonCancel";
-import { ButtonEdit } from "../../components/ui/ButtonEdit";
 import { ButtonSave } from "../../components/ui/ButtonSave";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { ChangeEvent, FormEvent, useState } from "react";
@@ -11,17 +10,25 @@ import { Header } from "../../components/Header";
 import { Input, TextArea } from "../../components/ui/Input";
 import { setupAPIClient } from "../../services/api";
 import { toast } from "react-toastify";
+import Campanhas from "../campanhas";
 
 type CampanhaProps = {
     id: string;
     title: string;
 }
 
-interface CampanhasProps {
+type UsuarioProps = {
+    id: string;
+    name: string;
+}
+interface AboutProps {
+    userList: UsuarioProps[];
     campanhaList: CampanhaProps[];
 }
 
-export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
+
+export default function FichaDePersonagem({ userList, campanhaList }: AboutProps) {
+    console.log(campanhaList)
     const [level, setLevel] = useState('')
     const [life, setLife] = useState('')
     const [name, setName] = useState('')
@@ -34,6 +41,10 @@ export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
 
     const [campanhas, setCampanha] = useState(campanhaList || [])
     const [campanhaSelected, setCampanhaSelected] = useState(0)
+
+    const [usuarios, setUsuario] = useState(userList || [])
+    const [usuarioSelected, setUsuarioSelected] = useState(0)
+
 
     function handleFile(event: ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) {
@@ -54,8 +65,11 @@ export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
 
     //Quando você seleciona uma nova campanha na lista
     function handleChangeCampanha(event) {
-        // console.log('selecionado: ', campanhas[event.target.value])
         setCampanhaSelected(event.target.value)
+    }
+
+    function handleChangeUser(event) {
+        setUsuarioSelected(event.target.value)
     }
 
     async function handleRegister(event: FormEvent) {
@@ -77,6 +91,7 @@ export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
             data.append('level', level);
             data.append('life', life);
             data.append('campanhasId', campanhas[campanhaSelected].id);
+            data.append('userId', usuarios[campanhaSelected].id);
 
             const apiClient = setupAPIClient();
 
@@ -126,7 +141,17 @@ export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
                             )}
                         </label>
 
-                        <select value={campanhaSelected} className={styles.select} onChange={handleChangeCampanha}>
+                        <select value={usuarioSelected} className={styles.select} onChange={handleChangeCampanha}>
+                            {usuarios.map((item, index) => {
+                                return (
+                                    <option key={item.id} value={index}>
+                                        {item.name}
+                                    </option>
+                                )
+                            })}
+                        </select>
+
+                        <select value={usuarioSelected} onChange={handleChangeUser}>
                             {campanhas.map((item, index) => {
                                 return (
                                     <option key={item.id} value={index}>
@@ -188,15 +213,19 @@ export default function FichaDePersonagem({ campanhaList }: CampanhasProps) {
         </>
     )
 }
+
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 
     const response = await apiClient.get('/campanha');
+    const responseUser = await apiClient.get('/about');
     // console.log(response.data)
+    // console.log(responseUser.data)
 
     return {
         props: {
-            campanhaList: response.data
+            campanhaList: response.data,
+            userList: responseUser.data
         }
     }
 })

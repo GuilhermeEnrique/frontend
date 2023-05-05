@@ -8,14 +8,14 @@ import Router from 'next/router';
 import { toast } from 'react-toastify';
 
 type AuthContextData = {
-    user: UserProps;
+    users: UsersProps;
     isAuthenticated: boolean;
     signIn: (credentials: SignInProps) => Promise<void>;
     signOut: () => void;
     signUp: (credentials: SignUpProps) => Promise<void>;
 }
 
-type UserProps = {
+type UsersProps = {
     id: string;
     name: string;
     email: string;
@@ -49,8 +49,8 @@ export function signOut() {
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
-    const [user, setUser] = useState<UserProps>()
-    const isAuthenticated = !!user;
+    const [users, setUser] = useState<UsersProps>()
+    const isAuthenticated = !!users;
 
     useEffect(() => {
         const { '@nextauth.token': token } = parseCookies();
@@ -133,7 +133,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut, signUp }}>
+        <AuthContext.Provider value={{ users, isAuthenticated, signIn, signOut, signUp }}>
             {children}
         </AuthContext.Provider>
     )

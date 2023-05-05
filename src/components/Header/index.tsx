@@ -8,7 +8,7 @@ import { AuthContext } from '../../contexts/AuthContext'
 
 
 export function Header() {
-    const { user, signOut } = useContext(AuthContext)
+    const { users, signOut } = useContext(AuthContext)
 
     return (
         <header className={styles.headerContainer}>
@@ -16,7 +16,7 @@ export function Header() {
                 <Link href="/dashboard">
                     <img src="/Icon-Dice-Roll.svg" alt="Logo Dice Roll" width={80} height={80} />
                 </Link>
-                <h1>olá, <span>{user?.name.charAt(0)}</span>{user?.name.slice(1)}</h1>
+                <h1>Dice-Roll</h1>
 
                 <nav className={styles.menuNav}>
                     <Link href="/profile">
@@ -27,7 +27,7 @@ export function Header() {
                     </Link>
 
                     <button onClick={signOut}>
-                        <FiLogOut color="#000" size={24} />
+                        <FiLogOut size={24} />
                     </button>
 
                 </nav>
@@ -35,5 +35,3 @@ export function Header() {
         </header>
     )
 }
-
-5891

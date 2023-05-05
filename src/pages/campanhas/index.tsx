@@ -41,9 +41,18 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
 
     const [modalItem, setModalItem] = useState<CampanhaItemProps[]>()
     const [modalVisible, setModalVisible] = useState(false);
+    const [refreshing, setRefreshing] = useState(false);
 
     function handleCloseModal() {
         setModalVisible(false);
+    }
+
+    async function handleRefresh() {
+        setRefreshing(true);
+        const apiClient = setupAPIClient();
+        const response = await apiClient.get('/campanha');
+        setCampanhaList(response.data);
+        setRefreshing(false);
     }
 
     async function handleOpenModalView(id: string) {
@@ -62,7 +71,7 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
     }
 
     Modal.setAppElement('#__next');
-
+    
     return (
         <>
             <Head>
@@ -73,15 +82,15 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
                 <main className={styles.container}>
                     <div className={styles.title}>
                         <h2>Suas campanhas</h2>
-                        <button>
-                            <FiRefreshCcw size={30} />
+                        <button onClick={handleRefresh} disabled={refreshing}>
+                            {refreshing ? 'Atualizando...' : <FiRefreshCcw size={30} />}
                         </button>
                     </div>
                     <div className={styles.campanhas}>
                         <article className={styles.listCampanhas}>
                             {campanhaList.map(item => (
                                 <section key={item.id} className={styles.selectCampanha}>
-                                    <button onClick={() => handleOpenModalView(item.id)}>
+                                    <button onClick={() => handleOpenModalView(item.id)} >
                                         <span>{item.title}</span>
                                     </button>
                                 </section>

@@ -61,6 +61,7 @@
         cursor: pointer;
 
         &:hover {
+            color: var(--Primary-2);
             transform: scale(1.2);
         }
     }

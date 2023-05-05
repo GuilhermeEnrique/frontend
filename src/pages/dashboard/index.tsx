@@ -13,19 +13,29 @@ export default function Dashboard() {
             <div className={styles.containerCenter}>
                 <Header />
                 <main className={styles.container}>
-                    <Link className={styles.personagem} href='/personagens'>
-                        <span>Fichas <br />de<br />personagens</span>
-                    </Link>
-                    <Link className={styles.campanhas} href='/campanhas'>
-                        <span>
-                            Campanhas
-                        </span>
-                    </Link>
-                    <Link className={styles.dados} href='/dados'>
-                        <span>
-                            Dados
-                        </span>
-                    </Link>
+                    <article className={styles.dashboard}>
+                        <section className={styles.personagem}>
+                            <Link href='/personagens'>
+                                <span>Fichas de personagens</span>
+                            </Link>
+                        </section>
+
+                        <section className={styles.campanhas}>
+                            <Link href='/campanhas'>
+                                <span>
+                                    Campanhas
+                                </span>
+                            </Link>
+                        </section>
+
+                        <section className={styles.dados}>
+                            <Link href='/dados'>
+                                <span>
+                                    Dados
+                                </span>
+                            </Link>
+                        </section>
+                    </article>
                 </main>
             </div>
         </>

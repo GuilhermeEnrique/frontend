@@ -33,6 +33,22 @@
         color: var(--Secundary);
         background: transparent;
         cursor: pointer;
+        transition: filter 0.7s;
+
+        :hover {
+            color: var(--Primary-2);
+            animation: animate 4s infinite;
+        }
+    }
+}
+
+@keyframes animate {
+    from {
+        transform: rotate(360deg);
+    }
+
+    to {
+        transform: rotate(0deg);
     }
 }
 
@@ -82,7 +98,6 @@
     transition: all 0.5s;
 
     button {
-        background: transparent;
         border-radius: 20px;
         height: 160px;
         align-items: center;
@@ -91,5 +106,22 @@
     :hover {
         opacity: 0.5;
         transform: scale(0.9);
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .container {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .listCampanhas {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+        margin-bottom: 2rem;
+
     }
 }
