@@ -12,15 +12,21 @@ import { FiRefreshCcw } from "react-icons/fi";
 import { setupAPIClient } from "../../services/api"
 import { useState } from 'react'
 
-type CampanhaProps = {
+type personagemProps = {
     id: string,
-    title: string,
+    name: string,
     description: string,
-    banner: string
+    banner: string,
+    classe: string,
+    race: string,
+    level: string,
+    life: string,
+    campanhasId: string,
+    userId: string,
 }
 
-interface CampanhasProps {
-    campanhas: CampanhaProps[];
+interface AboutProps {
+    personagem: personagemProps[];
 }
 
 export type CampanhaItemProps = {
@@ -35,9 +41,9 @@ export type CampanhaItemProps = {
     }
 }
 
-export default function Campanhas({ campanhas }: CampanhasProps) {
+export default function Campanhas({ personagem }: AboutProps) {
 
-    const [campanhaList, setCampanhaList] = useState(campanhas || [])
+    const [campanhaList, setCampanhaList] = useState(personagem || [])
 
     const [modalItem, setModalItem] = useState<CampanhaItemProps[]>()
     const [modalVisible, setModalVisible] = useState(false);
@@ -121,12 +127,12 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 
-    const response = await apiClient.get('/campanha');
+    const response = await apiClient.get('/campanha/personagens');
 
     // console.log(response.data);
     return {
         props: {
-            campanhas: response.data
+            personagens: response.data
         }
     }
 })
