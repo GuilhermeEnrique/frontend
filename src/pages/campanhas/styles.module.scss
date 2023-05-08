@@ -63,6 +63,7 @@
         height: 102px;
         cursor: pointer;
         box-shadow: (5px 5px 10px rgba(0, 0, 0, 0.253));
+
     }
 
     span {
@@ -78,7 +79,7 @@
 
 .listCampanhas {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
     align-items: center;
     justify-content: center;
@@ -89,17 +90,30 @@
         color: var(--Secundary);
         -webkit-text-stroke: 1px rgb(0, 0, 0);
         font-size: 25px;
+        text-align: center;
     }
+}
+
+.emptyList {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 2rem;
+    -webkit-text-stroke: 1px var(--Danger);
+    font-size: 25px;
+    text-align: center;
 }
 
 .selectCampanha {
     margin: 0 2rem;
     opacity: 1;
-    transition: all 0.5s;
+    transition: all 0.7s;
+
 
     button {
-        border-radius: 20px;
-        height: 160px;
+        border-radius: 30px;
+        height: 150px;
         align-items: center;
     }
 

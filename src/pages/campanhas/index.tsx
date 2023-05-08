@@ -70,8 +70,23 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
 
     }
 
+    async function handleExclusaoCampanha(id: string) {
+        const apiClient = setupAPIClient();
+        await apiClient.delete('/campanha/delete', {
+            params: {
+                campanhasId: id,
+            }
+        })
+
+        const response = await apiClient.get('/campanha');
+
+        setCampanhaList(response.data);
+        setModalVisible(false);
+    }
+
+
     Modal.setAppElement('#__next');
-    
+
     return (
         <>
             <Head>
@@ -87,6 +102,11 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
                         </button>
                     </div>
                     <div className={styles.campanhas}>
+                        {campanhaList.length === 0 && (
+                            <span className={styles.emptyList}>
+                                Nenhuma campanha foi encontrada...
+                            </span>
+                        )}
                         <article className={styles.listCampanhas}>
                             {campanhaList.map(item => (
                                 <section key={item.id} className={styles.selectCampanha}>
@@ -110,6 +130,7 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
                     <ModalCampanha
                         isOpen={modalVisible}
                         onRequestClose={handleCloseModal}
+                        handleExclusaoCampanha={handleExclusaoCampanha}
                         campanha={modalItem}
                     />
                 )}

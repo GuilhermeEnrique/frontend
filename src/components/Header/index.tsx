@@ -16,11 +16,19 @@ export function Header() {
                 <Link href="/dashboard">
                     <img src="/Icon-Dice-Roll.svg" alt="Logo Dice Roll" width={80} height={80} />
                 </Link>
-                <h1>Dice-Roll</h1>
-
+                
                 <nav className={styles.menuNav}>
                     <Link href="/profile">
                         Perfil
+                    </Link>
+                    <Link href="/campanhas">
+                        Campanhas
+                    </Link>
+                    <Link href="/dados">
+                        Dados
+                    </Link>
+                    <Link href="/personagens">
+                        Personagens
                     </Link>
                     <Link href="/about-us">
                         Sobre nós

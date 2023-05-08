@@ -1,18 +1,20 @@
 import Modal from "react-modal";
 import styles from './styles.module.scss';
 
-import { FiX, FiEdit } from 'react-icons/fi'
+import { FiX, FiEdit, FiTrash } from 'react-icons/fi'
 
 import { CampanhaItemProps } from "../../pages/campanhas";
 import Link from "next/link";
+import { setupAPIClient } from "../../services/api";
 
 interface ModalCampanhaProps {
     isOpen: boolean;
     onRequestClose: () => void;
+    handleExclusaoCampanha: (id: string) => void;
     campanha: CampanhaItemProps[];
 }
 
-export function ModalCampanha({ isOpen, onRequestClose, campanha }: ModalCampanhaProps) {
+export function ModalCampanha({ isOpen, onRequestClose, campanha, handleExclusaoCampanha }: ModalCampanhaProps) {
 
     const customStyles = {
         content: {
@@ -34,18 +36,24 @@ export function ModalCampanha({ isOpen, onRequestClose, campanha }: ModalCampanh
             style={customStyles}
         >
             <div className={styles.buttons}>
-            <Link href='/editar-campanha'>
-                <button className={styles.icon}>
-                    <FiEdit size={40} color="var(--Primary)" />
+                <button
+                    className={styles.icon}
+                    onClick={() => handleExclusaoCampanha(campanha[0].id)}
+                >
+                    <FiTrash size={40} color="var(--Danger)" />
                 </button>
-            </Link>
-            <button
-                type="button"
-                onClick={onRequestClose}
-                className={styles.icon}
-            >
-                <FiX size={40} color="var(--Danger)" />
-            </button>
+                <Link href='/editar-campanha'>
+                    <button className={styles.icon}>
+                        <FiEdit size={40} color="var(--Primary)" />
+                    </button>
+                </Link>
+                <button
+                    type="button"
+                    onClick={onRequestClose}
+                    className={styles.icon}
+                >
+                    <FiX size={40} color="var(--Danger)" />
+                </button>
             </div>
             <div className={styles.container}>
                 <h2>Detalhes da campanha</h2>

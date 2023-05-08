@@ -1,13 +1,13 @@
 .headerContainer {
     height: 7rem;
-    background-color: var(--Light-2);
+    background-color: var(--Primary-2);
 }
 
 .headerContent {
     max-width: 1250px;
     height: 7rem;
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 1rem;
 
     display: flex;
     justify-content: space-between;
@@ -15,6 +15,11 @@
 
     img {
         cursor: pointer;
+        transition: transform 0.8s;
+    }
+
+    img:hover {
+        transform: scale(1.2);
     }
 
     h1 {
@@ -39,17 +44,17 @@
     a {
         font-size: 20px;
         color: var(--Dark);
-        padding: 0 0.5rem;
+        padding: 0 0.2rem;
         display: inline-block;
         position: relative;
         transition: color 0.8s;
 
         &+a {
-            margin-left: 3rem;
+            margin-left: 2rem;
         }
 
         &:hover {
-            color: var(--Primary-2)
+            color: var(--Primary);
         }
     }
 
@@ -61,7 +66,7 @@
         cursor: pointer;
 
         &:hover {
-            color: var(--Primary-2);
+            color: var(--Primary);
             transform: scale(1.2);
         }
     }
