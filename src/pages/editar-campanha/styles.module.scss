@@ -23,14 +23,19 @@
     align-items: center;
 
     textarea {
-        min-height: 120px;
+        min-height: 200px;
+        text-transform: capitalize;
+        text-align: justify;
         width: 420px;
         resize: none;
     }
-    input{
+
+    input {
         width: 420px;
+        text-transform: capitalize;
     }
-    button{
+
+    button {
         width: 420px;
     }
 

@@ -20,15 +20,15 @@ type CampanhaProps = {
     banner: string;
 }
 
-interface CampanhasProps {
-    campanhas: CampanhaProps[];
+interface EditarCampanhaProps {
+    campanha: CampanhaProps;
 }
 
 
-export default function EditarCampanha({ campanhas }: CampanhasProps) {
-    const [title, setTitle] = useState('')
-    const [description, setDescription] = useState('')
-    const [avatarUrl, setAvatarUrl] = useState('')
+export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
+    const [title, setTitle] = useState(campanha.title)
+    const [description, setDescription] = useState(campanha.description)
+    const [avatarUrl, setAvatarUrl] = useState(campanha.banner)
     const [imageAvatar, setImageAvatar] = useState(null)
 
     function handleFile(event: ChangeEvent<HTMLInputElement>) {
@@ -58,7 +58,7 @@ export default function EditarCampanha({ campanhas }: CampanhasProps) {
                 toast.error("Preencha todos os campos");
                 return
             }
-            data.append('id', campanhas[0].id)
+            data.append('id', campanha.id)
             data.append('title', title);
             data.append('description', description);
             data.append('file', imageAvatar);
@@ -107,13 +107,13 @@ export default function EditarCampanha({ campanhas }: CampanhasProps) {
                             )}
                         </label>
                         <Input
-                            placeholder={campanhas[0].title}
+                            placeholder={campanha.title}
                             type="text"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                         <TextArea
-                            placeholder={campanhas[0].title}
+                            placeholder={campanha.description}
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
@@ -134,14 +134,14 @@ export default function EditarCampanha({ campanhas }: CampanhasProps) {
     )
 }
 export const getServerSideProps = canSSRAuth(async (ctx) => {
-    const apiClient = setupAPIClient(ctx)
+    const apiClient = setupAPIClient(ctx);
 
-    const response = await apiClient.get('/campanha');
+    const response = await apiClient.get(`/campanha`);
+    const campanha = response.data;
 
-    // console.log(response.data);
     return {
         props: {
-            campanhas: response.data
-        }
-    }
-})
+            campanha,
+        },
+    };
+});
