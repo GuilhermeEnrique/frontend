@@ -8,26 +8,52 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import Head from "next/head";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import Link from "next/link";
+import router from "next/router";
 import { setupAPIClient } from "../../services/api";
 import { toast } from "react-toastify";
 
-
-type CampanhaProps = {
+type PersonagemProps = {
     id: string;
-    title: string;
+    name: string;
     description: string;
+    classe: string;
+    race: string;
     banner: string;
+    level: string;
+    life: string;
+    campanhasId: string
+    userId: string;
+    Users: {
+        id: string
+        name: string;
+    };
+    campanhas: {
+        id: string;
+        title: string;
+    }
 }
 
-interface EditarCampanhaProps {
-    campanha: CampanhaProps;
+
+interface PersonagensProps {
+    personagens: PersonagemProps[];
 }
 
-export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
-    const [title, setTitle] = useState(campanha.title)
-    const [description, setDescription] = useState(campanha.description)
-    const [avatarUrl, setAvatarUrl] = useState(campanha.banner)
+export default function EditarCampanha({ personagens }: PersonagensProps) {
+    const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
+    const [race, setRace] = useState('')
+    const [level, setLevel] = useState('')
+    const [life, setLife] = useState('')
+    const [classe, setClasse] = useState('')
+
+    const [avatarUrl, setAvatarUrl] = useState('')
     const [imageAvatar, setImageAvatar] = useState(null)
+
+    const [campanhas, setCampanha] = useState(personagens[0].campanhas.title || [])
+    const [campanhaSelected, setCampanhaSelected] = useState(0)
+
+    const [usuarios, setUsuario] = useState(personagens[0].Users.name || [])
+    const [usuarioSelected, setUsuarioSelected] = useState(0)
 
     function handleFile(event: ChangeEvent<HTMLInputElement>) {
         if (!event.target.files) {
@@ -46,24 +72,32 @@ export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
         }
     }
 
+    function handleChangeCampanha(event) {
+        setCampanhaSelected(event.target.value)
+    }
+
+    function handleChangeUser(event) {
+        setUsuarioSelected(event.target.value)
+    }
+
     async function handleRegister(event: FormEvent) {
         event.preventDefault();
-        console.log(title, description)
+        console.log(name, description)
         try {
             const data = new FormData();
 
-            if (title === '' || description === '' || imageAvatar === null) {
+            if (name === '' || description === '' || imageAvatar === null) {
                 toast.error("Preencha todos os campos");
                 return
             }
-            data.append('id', campanha.id)
-            data.append('title', title);
+            data.append('id', '')
+            data.append('title', name);
             data.append('description', description);
             data.append('file', imageAvatar);
 
             const apiClient = setupAPIClient();
 
-            await apiClient.put('/campanha/:id', data)
+            await apiClient.put('/campanha/personagens/:id', data)
             toast.success("Campanha criada com sucesso!")
             window.location.reload();
         } catch (err) {
@@ -71,7 +105,7 @@ export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
             toast.error("Ops, erro ao cadastrar. . . ");
         }
 
-        setTitle('');
+        setName('');
         setDescription('');
         setAvatarUrl(null);
         setImageAvatar(null);
@@ -80,12 +114,12 @@ export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
     return (
         <>
             <Head>
-                <title>Campanhas - Dice-Roll</title>
+                <title>Editar personagem - Dice-Roll</title>
             </Head>
             <div className={styles.containerCenter} >
                 <Header />
                 <div className={styles.title}>
-                    <h2>Editar sua campanha</h2>
+                    <h2>Editar seu personagem</h2>
                 </div>
                 <main className={styles.container}>
                     <form className={styles.form} onSubmit={handleRegister}>
@@ -104,16 +138,52 @@ export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
                                 />
                             )}
                         </label>
+                        <select value={usuarioSelected} className={styles.select} onChange={handleChangeCampanha}>
+                            <option>
+                                {personagens[0].name}
+                            </option>
+                        </select>
+
+                        <select value={usuarioSelected} className={styles.select} onChange={handleChangeUser}>
+                            <option >
+                                {personagens[0].campanhas.title}
+                            </option>
+                        </select>
+
                         <Input
-                            placeholder={campanha.title}
+                            type="number"
+                            placeholder="Pontos de vida"
+                            value={life}
+                            onChange={(e) => setLife(e.target.value)}
+                        />
+                        <Input
+                            type="number"
+                            placeholder="Nível"
+                            value={level}
+                            onChange={(e) => setLevel(e.target.value)}
+                        />
+                        <Input
                             type="text"
-                            value={title}
-                            onChange={(e) => setTitle(e.target.value)}
+                            placeholder="Nome do personagem"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                         />
                         <TextArea
-                            placeholder={campanha.description}
+                            placeholder="Descrição"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
+                        />
+                        <Input
+                            type="text"
+                            placeholder="Raça"
+                            value={race}
+                            onChange={(e) => setRace(e.target.value)}
+                        />
+                        <Input
+                            type="text"
+                            placeholder="Classe"
+                            value={classe}
+                            onChange={(e) => setClasse(e.target.value)}
                         />
                         <div className={styles.buttons}>
                             <ButtonSave type="submit">
@@ -134,12 +204,12 @@ export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx);
 
-    const response = await apiClient.get(`/campanha`);
-    const campanha = response.data;
-    
+    const response = await apiClient.get(`/campanha/personagens`);
+    const personagens = response.data;
+
     return {
         props: {
-            campanha,
+            personagens,
         },
     };
 });

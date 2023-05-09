@@ -141,7 +141,7 @@ export default function FichaDePersonagem({ userList, campanhaList }: AboutProps
                             )}
                         </label>
 
-                        <select value={usuarioSelected} className={styles.select} onChange={handleChangeCampanha}>
+                        <select value={usuarioSelected} className={styles.select} onChange={handleChangeUser}>
                             {usuarios.map((item, index) => {
                                 return (
                                     <option key={item.id} value={index}>
@@ -151,7 +151,7 @@ export default function FichaDePersonagem({ userList, campanhaList }: AboutProps
                             })}
                         </select>
 
-                        <select value={usuarioSelected} onChange={handleChangeUser}>
+                        <select value={campanhaSelected} onChange={handleChangeCampanha}>
                             {campanhas.map((item, index) => {
                                 return (
                                     <option key={item.id} value={index}>
@@ -200,7 +200,7 @@ export default function FichaDePersonagem({ userList, campanhaList }: AboutProps
                             <ButtonSave type="submit">
                                 Salvar
                             </ButtonSave>
-                            <Link href="/">
+                            <Link href="/personagens">
                                 <ButtonCancel>
                                     Cancelar
                                 </ButtonCancel>

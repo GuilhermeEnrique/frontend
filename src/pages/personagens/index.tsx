@@ -1,20 +1,27 @@
-import { useState } from "react";
-import { setupAPIClient } from "../../services/api";
-import { canSSRAuth } from "../../utils/canSSRAuth";
 import Head from "next/head";
 import styles from './styles.module.scss';
 import Link from "next/link";
 import Modal from 'react-modal';
-import { Header } from "../../components/Header";
-import { FiPlusCircle, FiRefreshCcw } from "react-icons/fi";
+
 import { ButtonEdit } from "../../components/ui/ButtonEdit";
+import { canSSRAuth } from "../../utils/canSSRAuth";
+import { Header } from "../../components/Header";
 import { ModalPersonagem } from "../../components/ModalPersonagem";
+import { FiPlusCircle, FiRefreshCcw } from "react-icons/fi";
+import { setupAPIClient } from "../../services/api";
+import { useState } from "react";
 
 type PersonagemProps = {
-    id: string,
-    name: string,
-    description: string,
-    banner: string
+    id: string;
+    name: string;
+    description: string;
+    classe: string;
+    race: string;
+    banner: string;
+    level: string;
+    life: string;
+    campanhasId: string
+    userId: string;
 }
 
 interface PersonagensProps {
@@ -30,7 +37,7 @@ export type PersonagemItemProps = {
     level: string;
     classe: string;
     life: string
-    User: {
+    Users: {
         id: string
         name: string;
     };
@@ -65,7 +72,7 @@ export default function Personagens({ personagens }: PersonagensProps) {
 
         const response = await apiClient.get('/campanha/personagens', {
             params: {
-                userId: id,
+                id: id,
             }
         })
         console.log(response.data)
@@ -81,7 +88,7 @@ export default function Personagens({ personagens }: PersonagensProps) {
             }
         })
 
-        const response = await apiClient.get('/personagens');
+        const response = await apiClient.get('/campanha/personagens');
 
         setPersonagemList(response.data);
         setModalVisible(false);
@@ -117,10 +124,10 @@ export default function Personagens({ personagens }: PersonagensProps) {
                             ))}
                         </article>
 
-                        <Link href="/criar-campanha">
+                        <Link href="/criar-personagem">
                             <ButtonEdit>
                                 <FiPlusCircle className={styles.icon} /> <br />
-                                Criar campanha
+                                Criar personagem
                             </ButtonEdit>
                         </Link>
                     </div>
