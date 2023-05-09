@@ -58,14 +58,15 @@ export function ModalPersonagem({ isOpen, onRequestClose, personagem, handleExcl
             <div className={styles.container}>
                 <h2>Detalhes do personagem</h2>
                 <span className={styles.table}>
-                    <span className={styles.title}><strong>Personagem</strong>: {personagem[0].name}</span>
-                    <span className={styles.description}><strong>Vida:</strong> {personagem[0].life}</span>
+                    {/* <span className={styles.title}><strong>Personagem</strong>: {personagem[0].name}</span> */}
+                    {/* <span className={styles.description}><strong>Vida:</strong> {personagem[0].life}</span>
                     <span className={styles.description}><strong>Raça:</strong> {personagem[0].race}</span>
                     <span className={styles.description}><strong>Nível:</strong> {personagem[0].level}</span>
                     <span className={styles.description}><strong>Classe:</strong> {personagem[0].classe}</span>
                     <span className={styles.description}><strong>Descrição:</strong> {personagem[0].description}</span>
-                    <span className={styles.description}><strong>Campanha:</strong> {personagem[0].campanhas.title}</span>
-                    
+                    <span className={styles.description}><strong>Usuário:</strong> {personagem[0].User.name}</span>
+                    <span className={styles.description}><strong>Campanha:</strong> {personagem[0].campanhas.title}</span> */}
+
                 </span>
             </div>
         </Modal>

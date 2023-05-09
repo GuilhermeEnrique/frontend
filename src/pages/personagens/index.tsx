@@ -1,55 +1,47 @@
-import Head from "next/head"
-import Link from "next/link"
-import Modal from 'react-modal';
-import styles from './styles.module.scss'
-
-import { ButtonEdit } from "../../components/ui/ButtonEdit"
+import { useState } from "react";
+import { setupAPIClient } from "../../services/api";
 import { canSSRAuth } from "../../utils/canSSRAuth";
-import { Header } from "../../components/Header"
+import Head from "next/head";
+import styles from './styles.module.scss';
+import Link from "next/link";
+import Modal from 'react-modal';
+import { Header } from "../../components/Header";
+import { FiPlusCircle, FiRefreshCcw } from "react-icons/fi";
+import { ButtonEdit } from "../../components/ui/ButtonEdit";
 import { ModalPersonagem } from "../../components/ModalPersonagem";
-import { FiPlusCircle } from "react-icons/fi";
-import { FiRefreshCcw } from "react-icons/fi";
-import { setupAPIClient } from "../../services/api"
-import { useState } from 'react'
 
-type personagemProps = {
+type PersonagemProps = {
     id: string,
     name: string,
     description: string,
-    banner: string,
-    classe: string,
-    race: string,
-    level: string,
-    life: string,
-    campanhasId: string,
-    userId: string,
+    banner: string
 }
 
-interface AboutProps {
-    personagem: personagemProps[];
+interface PersonagensProps {
+    personagens: PersonagemProps[];
 }
 
 export type PersonagemItemProps = {
-    id: string,
-    name: string,
-    description: string,
-    banner: string,
-    classe: string,
-    race: string,
-    level: string,
-    life: string,
-    userId: string,
-    campanhasId: string,
+    id: string;
+    name: string;
+    description: string;
+    banner: string;
+    race: string;
+    level: string;
+    classe: string;
+    life: string
+    User: {
+        id: string
+        name: string;
+    };
     campanhas: {
-        id: string,
-        title: string
+        id: string;
+        title: string;
     }
-
 }
 
-export default function Personagem({ personagem }: AboutProps) {
-
-    const [personagemList, setPersonagemList] = useState(personagem || [])
+export default function Personagens({ personagens }: PersonagensProps) {
+    const [personagemList, setPersonagemList] = useState(personagens || [])
 
     const [modalItem, setModalItem] = useState<PersonagemItemProps[]>()
     const [modalVisible, setModalVisible] = useState(false);
@@ -73,16 +65,13 @@ export default function Personagem({ personagem }: AboutProps) {
 
         const response = await apiClient.get('/campanha/personagens', {
             params: {
-                id: id,
+                userId: id,
             }
         })
         console.log(response.data)
         setModalItem(response.data);
         setModalVisible(true);
-
     }
-
-    Modal.setAppElement('#__next');
 
     async function handleExclusaoPersonagem(id: string) {
         const apiClient = setupAPIClient();
@@ -92,12 +81,12 @@ export default function Personagem({ personagem }: AboutProps) {
             }
         })
 
-        const response = await apiClient.get('/campanha/personagens/');
+        const response = await apiClient.get('/personagens');
 
         setPersonagemList(response.data);
         setModalVisible(false);
     }
-
+    Modal.setAppElement('#__next');
     return (
         <>
             <Head>
@@ -113,6 +102,11 @@ export default function Personagem({ personagem }: AboutProps) {
                         </button>
                     </div>
                     <div className={styles.personagens}>
+                        {personagemList.length === 0 && (
+                            <span className={styles.emptyList}>
+                                Nenhum personagem foi encontrado...
+                            </span>
+                        )}
                         <article className={styles.listPersonagens}>
                             {personagemList.map(item => (
                                 <section key={item.id} className={styles.selectPersonagens}>
@@ -123,10 +117,10 @@ export default function Personagem({ personagem }: AboutProps) {
                             ))}
                         </article>
 
-                        <Link href="/criar-personagem">
+                        <Link href="/criar-campanha">
                             <ButtonEdit>
                                 <FiPlusCircle className={styles.icon} /> <br />
-                                Criar personagem
+                                Criar campanha
                             </ButtonEdit>
                         </Link>
                     </div>
@@ -136,8 +130,8 @@ export default function Personagem({ personagem }: AboutProps) {
                     <ModalPersonagem
                         isOpen={modalVisible}
                         onRequestClose={handleCloseModal}
-                        personagem={modalItem}
                         handleExclusaoPersonagem={handleExclusaoPersonagem}
+                        personagem={modalItem}
                     />
                 )}
             </div>
@@ -150,7 +144,7 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 
     const response = await apiClient.get('/campanha/personagens');
 
-    console.log(response.data);
+    // console.log(response.data);
     return {
         props: {
             personagens: response.data

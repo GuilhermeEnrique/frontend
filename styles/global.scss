@@ -5,6 +5,14 @@
     box-sizing: border-box;
 }
 
+body{
+    background-image: url('../public/Background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 :root {
     --Light-2: #eff3fe;
     --Light: #FFFFFF;
