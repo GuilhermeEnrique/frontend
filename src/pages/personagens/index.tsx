@@ -6,7 +6,7 @@ import styles from './styles.module.scss'
 import { ButtonEdit } from "../../components/ui/ButtonEdit"
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { Header } from "../../components/Header"
-import { ModalCampanha } from "../../components/ModalCampanha";
+import { ModalPersonagem } from "../../components/ModalPersonagem";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiRefreshCcw } from "react-icons/fi";
 import { setupAPIClient } from "../../services/api"
@@ -29,23 +29,29 @@ interface AboutProps {
     personagem: personagemProps[];
 }
 
-export type CampanhaItemProps = {
-    id: string;
-    title: string;
-    description: string;
-    banner: string;
-    characters: {
-        map(arg0: (character: any) => JSX.Element): import("react").ReactNode;
-        id: string;
-        name: string;
+export type PersonagemItemProps = {
+    id: string,
+    name: string,
+    description: string,
+    banner: string,
+    classe: string,
+    race: string,
+    level: string,
+    life: string,
+    userId: string,
+    campanhasId: string,
+    campanhas: {
+        id: string,
+        title: string
     }
+
 }
 
-export default function Campanhas({ personagem }: AboutProps) {
+export default function Personagem({ personagem }: AboutProps) {
 
-    const [campanhaList, setCampanhaList] = useState(personagem || [])
+    const [personagemList, setPersonagemList] = useState(personagem || [])
 
-    const [modalItem, setModalItem] = useState<CampanhaItemProps[]>()
+    const [modalItem, setModalItem] = useState<PersonagemItemProps[]>()
     const [modalVisible, setModalVisible] = useState(false);
     const [refreshing, setRefreshing] = useState(false);
 
@@ -56,8 +62,8 @@ export default function Campanhas({ personagem }: AboutProps) {
     async function handleRefresh() {
         setRefreshing(true);
         const apiClient = setupAPIClient();
-        const response = await apiClient.get('/campanha');
-        setCampanhaList(response.data);
+        const response = await apiClient.get('/campanha/personagens');
+        setPersonagemList(response.data);
         setRefreshing(false);
     }
 
@@ -65,7 +71,7 @@ export default function Campanhas({ personagem }: AboutProps) {
 
         const apiClient = setupAPIClient();
 
-        const response = await apiClient.get('/campanha', {
+        const response = await apiClient.get('/campanha/personagens', {
             params: {
                 id: id,
             }
@@ -78,45 +84,60 @@ export default function Campanhas({ personagem }: AboutProps) {
 
     Modal.setAppElement('#__next');
 
+    async function handleExclusaoPersonagem(id: string) {
+        const apiClient = setupAPIClient();
+        await apiClient.delete('/campanha/personagens/delete', {
+            params: {
+                personagemId: id,
+            }
+        })
+
+        const response = await apiClient.get('/campanha/personagens/');
+
+        setPersonagemList(response.data);
+        setModalVisible(false);
+    }
+
     return (
         <>
             <Head>
-                <title>Campanhas - Dice-Roll</title>
+                <title>Personagens - Dice-Roll</title>
             </Head>
             <div className={styles.containerCenter} >
                 <Header />
                 <main className={styles.container}>
                     <div className={styles.title}>
-                        <h2>Suas campanhas</h2>
+                        <h2>Seus personagens</h2>
                         <button onClick={handleRefresh} disabled={refreshing}>
                             {refreshing ? 'Atualizando...' : <FiRefreshCcw size={30} />}
                         </button>
                     </div>
-                    <div className={styles.campanhas}>
-                        <article className={styles.listCampanhas}>
-                            {campanhaList.map(item => (
-                                <section key={item.id} className={styles.selectCampanha}>
+                    <div className={styles.personagens}>
+                        <article className={styles.listPersonagens}>
+                            {personagemList.map(item => (
+                                <section key={item.id} className={styles.selectPersonagens}>
                                     <button onClick={() => handleOpenModalView(item.id)} >
-                                        <span>{item.title}</span>
+                                        <span>{item.name}</span>
                                     </button>
                                 </section>
                             ))}
                         </article>
 
-                        <Link href="/criar-campanha">
+                        <Link href="/criar-personagem">
                             <ButtonEdit>
                                 <FiPlusCircle className={styles.icon} /> <br />
-                                Criar campanha
+                                Criar personagem
                             </ButtonEdit>
                         </Link>
                     </div>
                 </main>
 
                 {modalVisible && (
-                    <ModalCampanha
+                    <ModalPersonagem
                         isOpen={modalVisible}
                         onRequestClose={handleCloseModal}
-                        campanha={modalItem}
+                        personagem={modalItem}
+                        handleExclusaoPersonagem={handleExclusaoPersonagem}
                     />
                 )}
             </div>
@@ -129,7 +150,7 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 
     const response = await apiClient.get('/campanha/personagens');
 
-    // console.log(response.data);
+    console.log(response.data);
     return {
         props: {
             personagens: response.data

@@ -1,0 +1,62 @@
+.container {
+    width: 620px;
+    background-color: var(--Secundary);
+    color: var(--Light);
+
+    h2 {
+        margin: 1rem 0;
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around
+}
+
+.icon {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+
+    :hover{
+        opacity: 0.5;
+        transform: scale(0.9);
+    }
+}
+
+.containerItem {
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+}
+
+.description {
+    margin-top: 0.5rem;
+    word-break: keep-all;
+    text-align: justify;
+    margin-bottom: 0.5rem;
+}
+
+.table {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem 0;
+}
+
+.title {
+    text-transform: capitalize;
+}
+
+@media screen and (max-width: 760px) {
+    .container {
+        width: 430px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .container {
+        width: 300px;
+    }
+}
