@@ -21,6 +21,7 @@ interface DetailsProps {
 }
 
 export default function FichaPersonagem({ userList }: DetailsProps) {
+    console.log(userList)
     const [oldPassword, setOldPassword] = useState('')
     const [newPassword, setNewPassword] = useState('')
 
@@ -53,14 +54,14 @@ export default function FichaPersonagem({ userList }: DetailsProps) {
             <div className={styles.containerCenter}>
                 <Header />
                 <div className={styles.title}>
-                    <h1>Altere sua senha</h1>
+                    <h2>Altere sua senha</h2>
                 </div>
                 <form onSubmit={handleAlterar}>
                     <div className={styles.container}>
                         <Input
-                            placeholder='Antiga Senha'
-                            value={id}
-                            onChange={(e) => setId(e.target.value)}
+                            placeholder='Usuário'
+                            value={''}
+                            // onChange={(e) => (e.target.value)}
                         />
                         <Input
                             placeholder='Antiga Senha'
@@ -91,7 +92,6 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx)
 
     const response = await apiClient.get('/about');
-    console.log(response.data)
 
     return {
         props: {

@@ -42,11 +42,11 @@ export function ModalCampanha({ isOpen, onRequestClose, campanha, handleExclusao
                 >
                     <FiTrash size={40} color="var(--Danger)" />
                 </button>
-                <Link href='/editar-campanha'>
-                    <button className={styles.icon}>
-                        <FiEdit size={40} color="var(--Primary)" />
-                    </button>
-                </Link>
+
+                <button className={styles.icon}>
+                    <FiEdit size={40} color="var(--Primary)" />
+                </button>
+
                 <button
                     type="button"
                     onClick={onRequestClose}
@@ -65,7 +65,7 @@ export function ModalCampanha({ isOpen, onRequestClose, campanha, handleExclusao
                         <section key={item.id} className={styles.containerItem}>
                             {item.characters.map(character => (
                                 <div key={character.id}>
-                                    <span>{character.name}: {character.classe}</span>
+                                    <span>Nome: {character.name}, função: {character.classe}</span>
                                 </div>
                             ))}
                         </section>

@@ -90,7 +90,7 @@ export default function EditarCampanha({ personagens }: PersonagensProps) {
                 toast.error("Preencha todos os campos");
                 return
             }
-            data.append('id', '')
+            data.append('id', personagens[0].id)
             data.append('title', name);
             data.append('description', description);
             data.append('file', imageAvatar);
@@ -98,17 +98,13 @@ export default function EditarCampanha({ personagens }: PersonagensProps) {
             const apiClient = setupAPIClient();
 
             await apiClient.put('/campanha/personagens/:id', data)
-            toast.success("Campanha criada com sucesso!")
+            toast.success("Atualizado com sucesso!")
             window.location.reload();
         } catch (err) {
             console.log(err);
             toast.error("Ops, erro ao cadastrar. . . ");
         }
 
-        setName('');
-        setDescription('');
-        setAvatarUrl(null);
-        setImageAvatar(null);
     }
 
     return (
@@ -140,11 +136,11 @@ export default function EditarCampanha({ personagens }: PersonagensProps) {
                         </label>
                         <select value={usuarioSelected} className={styles.select} onChange={handleChangeCampanha}>
                             <option>
-                                {personagens[0].name}
+                                {personagens[0].Users.name}
                             </option>
                         </select>
 
-                        <select value={usuarioSelected} className={styles.select} onChange={handleChangeUser}>
+                        <select value={campanhaSelected} className={styles.select} onChange={handleChangeUser}>
                             <option >
                                 {personagens[0].campanhas.title}
                             </option>

@@ -46,49 +46,47 @@ export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
         }
     }
 
-    async function handleRegister(event: FormEvent) {
+    async function handleUpdate(event: FormEvent) {
         event.preventDefault();
         console.log(title, description)
         try {
             const data = new FormData();
 
-            if (title === '' || description === '' || imageAvatar === null) {
+            if (title === '' || description === '') {
                 toast.error("Preencha todos os campos");
                 return
             }
-            data.append('id', campanha.id)
+
             data.append('title', title);
             data.append('description', description);
-            data.append('file', imageAvatar);
+
+            if (imageAvatar) {
+                data.append('file', imageAvatar);
+            }
 
             const apiClient = setupAPIClient();
 
-            await apiClient.put('/campanha/:id', data)
-            toast.success("Campanha criada com sucesso!")
+            await apiClient.put(`/campanha/${campanha.id}`, data)
+            toast.success("Campanha atualizada com sucesso!")
             window.location.reload();
         } catch (err) {
             console.log(err);
-            toast.error("Ops, erro ao cadastrar. . . ");
+            toast.error("Ops, erro ao atualizar. . . ");
         }
-
-        setTitle('');
-        setDescription('');
-        setAvatarUrl(null);
-        setImageAvatar(null);
     }
 
     return (
         <>
             <Head>
-                <title>Campanhas - Dice-Roll</title>
+                <title>Editar campanha - Dice-Roll</title>
             </Head>
-            <div className={styles.containerCenter} >
+            <div className={styles.containerCenter}>
                 <Header />
                 <div className={styles.title}>
                     <h2>Editar sua campanha</h2>
                 </div>
                 <main className={styles.container}>
-                    <form className={styles.form} onSubmit={handleRegister}>
+                    <form className={styles.form} onSubmit={handleUpdate}>
                         <label className={styles.labelAvatar}>
                             <span>
                                 <FiCamera className={styles.icon} />
@@ -127,16 +125,17 @@ export default function EditarCampanha({ campanha }: EditarCampanhaProps) {
                         </div>
                     </form>
                 </main>
-            </div >
+            </div>
         </>
     )
+
 }
 export const getServerSideProps = canSSRAuth(async (ctx) => {
     const apiClient = setupAPIClient(ctx);
-
-    const response = await apiClient.get(`/campanha`);
-    const campanha = response.data;
     
+    const response = await apiClient.get(`/campanha/`);
+    const campanha = response.data;
+    console.log(campanha)
     return {
         props: {
             campanha,

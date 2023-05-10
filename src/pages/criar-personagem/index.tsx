@@ -40,10 +40,10 @@ export default function FichaDePersonagem({ userList, campanhaList }: AboutProps
     const [imageAvatar, setImageAvatar] = useState(null)
 
     const [campanhas, setCampanha] = useState(campanhaList || [])
-    const [campanhaSelected, setCampanhaSelected] = useState(0)
+    const [campanhaSelected, setCampanhaSelected] = useState('')
 
     const [usuarios, setUsuario] = useState(userList || [])
-    const [usuarioSelected, setUsuarioSelected] = useState(0)
+    const [usuarioSelected, setUsuarioSelected] = useState('')
 
 
     function handleFile(event: ChangeEvent<HTMLInputElement>) {
@@ -142,6 +142,7 @@ export default function FichaDePersonagem({ userList, campanhaList }: AboutProps
                         </label>
 
                         <select value={usuarioSelected} className={styles.select} onChange={handleChangeUser}>
+                            <option value="" disabled selected>Selecione um usuário</option>
                             {usuarios.map((item, index) => {
                                 return (
                                     <option key={item.id} value={index}>
@@ -152,6 +153,7 @@ export default function FichaDePersonagem({ userList, campanhaList }: AboutProps
                         </select>
 
                         <select value={campanhaSelected} onChange={handleChangeCampanha}>
+                            <option value="" disabled selected>Seleciona uma campanha</option>
                             {campanhas.map((item, index) => {
                                 return (
                                     <option key={item.id} value={index}>
@@ -219,8 +221,6 @@ export const getServerSideProps = canSSRAuth(async (ctx) => {
 
     const response = await apiClient.get('/campanha');
     const responseUser = await apiClient.get('/about');
-    // console.log(response.data)
-    // console.log(responseUser.data)
 
     return {
         props: {

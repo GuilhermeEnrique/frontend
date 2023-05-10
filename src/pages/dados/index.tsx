@@ -1,52 +1,37 @@
 import Head from "next/head";
-import React, { FC, useEffect, useRef } from "react";
+import React, { FormEvent, useState } from "react";
 import styles from './styles.module.scss';
 import { Header } from "../../components/Header";
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { ButtonEdit } from "../../components/ui/ButtonEdit";
+import { Input } from "../../components/ui/Input";
+import { setupAPIClient } from "../../services/api";
+import { toast } from "react-toastify";
 
 export default function Dados() {
-    const Roll: FC = () => {
-        const images: string[] = [
-            'dice-01.svg',
-            'dice-02.svg',
-            'dice-03.svg',
-            'dice-04.svg',
-            'dice-05.svg',
-            'dice-06.svg',
-        ];
+    const [tipo, setTipo] = useState('');
+    const [quantidade, setQuantidade] = useState('');
+    const [results, setResults] = useState([]);
 
-        const diceRef = useRef<NodeListOf<HTMLImageElement>>(null);
+    async function handleSubmit(event: FormEvent) {
+        event.preventDefault();
 
-        useEffect(() => {
-            diceRef.current = document.querySelectorAll('img');
-        }, []);
+        try {
+            const data = { type: tipo, quantity: quantidade };
+            const apiClient = setupAPIClient();
+            console.log(data)
+            const response = await apiClient.post('/roll', data);
+            const { result, sum } = response.data;
 
-        function handleRoll() {
-            diceRef.current?.forEach((die) => {
-                die.classList.add('shake');
-            });
+            setResults(result);
+            toast.success("Gira, gira, gira ASPAS")
 
-            setTimeout(() => {
-                diceRef.current?.forEach((die) => {
-                    die.classList.remove('shake');
-                });
-
-                const dieOneValue = Math.floor(Math.random() * 6);
-                const dieTwoValue = Math.floor(Math.random() * 6);
-
-                document.querySelector<HTMLImageElement>('#die-1')!.src = images[dieOneValue];
-                document.querySelector<HTMLImageElement>('#die-2')!.src = images[dieTwoValue];
-                document.querySelector<HTMLDivElement>('#total')!.innerHTML =
-                    'Os resultados são: ' + ((dieOneValue + 1) + (dieTwoValue + 1));
-            }, 1000);
+        } catch (err) {
+            console.log(err);
+            toast.error("Press F no chat");
         }
-
-        useEffect(() => {
-            handleRoll();
-        }, []);
-
-        return <></>;
+        setTipo('');
+        setQuantidade('');
     };
 
     return (
@@ -54,18 +39,49 @@ export default function Dados() {
             <Head>
                 <title>Dados - Dice-Roll</title>
             </Head>
-            <div className={styles.container}>
-                <Header />
-                <div className={styles.diceWrapper}>
-                    <img id="die1" className={styles.die1} />
-                    <img id="die2" className={styles.die2} />
-                    <img id="die3" className={styles.die3} />
-                </div>
-                <p id="total" className={styles.total}>Total:</p>
-                <ButtonEdit type="submit">
-                    Rolar dados
-                </ButtonEdit>
-            </div>
+            <Header />
+            <div>
+                <h2 className={styles.title}>Dados</h2>
+                <form className={styles.container} onSubmit={handleSubmit}>
+                    <select
+                        className={styles.select}
+                        value={tipo}
+                        onChange={(event) => setTipo(event.target.value)}
+                    >
+                        <option value="" disabled>Selecione um tipo de dado</option>
+                        <option value={'4'}>D4</option>
+                        <option value={'6'}>D6</option>
+                        <option value={'8'}>D8</option>
+                        <option value={'10'}>D12</option>
+                        <option value={'20'}>D20</option>
+                    </select>
+                    {/* <Input
+                        type="text"
+                        placeholder="Tipo"
+                        value={tipo}
+                        onChange={(event) => setTipo(event.target.value)}
+                    /> */}
+                    <Input
+                        type="number"
+                        placeholder="Quantidade"
+                        value={quantidade}
+                        onChange={(event) => setQuantidade(event.target.value)}
+                    />
+
+                    <ButtonEdit children='Rolar' type="submit" />
+                    {results.length > 0 && (
+                        <div>
+                            <h3>Resultados:</h3>
+                            <ul>
+                                {results.map((value, index) => (
+                                    <li key={index}>{value}</li>
+                                ))}
+                            </ul>
+                            <span>Soma dos resultados: {results.reduce((a, b) => a + b)}</span>
+                        </div>
+                    )}
+                </form>
+            </div >
         </>
     )
 }

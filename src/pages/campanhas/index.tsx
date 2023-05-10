@@ -7,7 +7,7 @@ import { ButtonEdit } from "../../components/ui/ButtonEdit"
 import { canSSRAuth } from "../../utils/canSSRAuth";
 import { Header } from "../../components/Header"
 import { ModalCampanha } from "../../components/ModalCampanha";
-import { ModalCampanhaEdit } from "../../components/ModalCampanhaEdit";
+// import { ModalCampanhaEdit } from "../../components/ModalCampanhaEdit";
 import { FiPlusCircle, FiRefreshCcw } from "react-icons/fi";
 import { setupAPIClient } from "../../services/api"
 import { useState } from 'react'
@@ -43,18 +43,6 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
 
     const [refreshing, setRefreshing] = useState(false);
 
-    const [modalEditMode, setModalEditMode] = useState(false);
-    const [modalEditItem, setModalEditItem] = useState<CampanhaItemProps>();
-
-    function handleOpenModalEdit(item: CampanhaItemProps) {
-        setModalEditMode(true);
-        setModalEditItem(item);
-    }
-
-    function handleCloseModalEdit() {
-        setModalEditMode(false);
-    }
-
     function handleCloseModal() {
         setModalVisible(false);
     }
@@ -68,7 +56,6 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
     }
 
     async function handleOpenModalView(id: string) {
-
         const apiClient = setupAPIClient();
 
         const response = await apiClient.get('/campanha', {
@@ -95,7 +82,6 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
         setCampanhaList(response.data);
         setModalVisible(false);
     }
-
 
     Modal.setAppElement('#__next');
 
@@ -125,7 +111,6 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
                                     <button onClick={() => handleOpenModalView(item.id)} >
                                         <span>{item.title}</span>
                                     </button>
-                                    <button onClick={() => handleOpenModalEdit(item)}></button>
                                 </section>
                             ))}
                         </article>
@@ -147,14 +132,7 @@ export default function Campanhas({ campanhas }: CampanhasProps) {
                         campanha={modalItem}
                     />
                 )}
-                
-                {modalEditMode && (
-                    <ModalCampanhaEdit
-                        isOpen={modalEditMode}
-                        onRequestClose={handleCloseModalEdit}
-                        campanha={modalEditItem}
-                    />
-                )}
+
             </div>
         </>
     )
