@@ -17,7 +17,9 @@ export default function Campanhas() {
     const [avatarUrl, setAvatarUrl] = useState('')
     const [imageAvatar, setImageAvatar] = useState(null)
 
+    // Função para lidar com a seleção de um arquivo de imagem
     function handleFile(event: ChangeEvent<HTMLInputElement>) {
+        // Verifica se existem arquivos selecionados
         if (!event.target.files) {
             return;
         }
@@ -27,18 +29,18 @@ export default function Campanhas() {
         if (!image) {
             return;
         }
-
+        // Verifica se o tipo de arquivo é imagem JPEG ou PNG
         if (image.type === 'image/jpeg' || image.type === 'image/png') {
             setImageAvatar(image);
             setAvatarUrl(URL.createObjectURL(event.target.files[0]))
         }
     }
-
+    // Função para lidar com o envio do formulário de registro da campanha
     async function handleRegister(event: FormEvent) {
         event.preventDefault();
         try {
             const data = new FormData();
-
+            // Verifica se o título, descrição e imagem do avatar foram preenchidos
             if (title === '' || description === '' || imageAvatar === null) {
                 toast.error("Preencha todos os campos");
                 return
@@ -56,7 +58,7 @@ export default function Campanhas() {
             console.log(err);
             toast.error("Ops, erro ao cadastrar. . . ");
         }
-
+        // Limpa os campos após o registro da campanha
         setTitle('');
         setDescription('');
         setAvatarUrl(null);

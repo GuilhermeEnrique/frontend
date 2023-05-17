@@ -55,12 +55,7 @@ export default function Dados() {
                         <option value={'10'}>D12</option>
                         <option value={'20'}>D20</option>
                     </select>
-                    {/* <Input
-                        type="text"
-                        placeholder="Tipo"
-                        value={tipo}
-                        onChange={(event) => setTipo(event.target.value)}
-                    /> */}
+                    
                     <Input
                         type="number"
                         placeholder="Quantidade"
